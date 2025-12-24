@@ -1,0 +1,1720 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>O2 Restaurant - Gaza | قائمة الطعام</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --brand-color: #e20004;
+        --dark-bg: #0a0a0a;
+        --card-bg: #1a1a1a;
+        --text-primary: #ffffff;
+        --text-secondary: #b0b0b0;
+        --shadow: rgba(226, 0, 4, 0.3);
+        --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Cairo", sans-serif;
+        background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1a1a 100%);
+        color: var(--text-primary);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      header {
+        background: linear-gradient(
+          180deg,
+          rgba(10, 10, 10, 0.95) 0%,
+          rgba(26, 26, 26, 0.9) 100%
+        );
+        backdrop-filter: blur(10px);
+        padding: 1.5rem 0;
+        text-align: center;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 4px 20px rgba(226, 0, 4, 0.2);
+        animation: slideDown 0.6s ease-out;
+      }
+
+      .header-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .logo {
+        font-size: 2.5rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        text-shadow: 0 0 30px rgba(226, 0, 4, 0.5);
+        letter-spacing: 2px;
+        flex: 1;
+        text-align: center;
+      }
+
+      .logo-red {
+        color: var(--brand-color);
+        font-size: 3rem;
+        font-weight: 800;
+      }
+
+      .tagline {
+        color: var(--text-primary);
+        font-size: 1.2rem;
+        font-weight: 300;
+        text-align: center;
+        padding: 0 20px;
+        margin-top: 0.5rem;
+      }
+
+      /* Burger Menu */
+      .burger-menu {
+        width: 35px;
+        height: 30px;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        z-index: 101;
+      }
+
+      .burger-line {
+        width: 100%;
+        height: 3px;
+        background: var(--brand-color);
+        border-radius: 3px;
+        transition: var(--transition);
+      }
+
+      .burger-menu.active .burger-line:nth-child(1) {
+        transform: translateY(13.5px) rotate(45deg);
+      }
+
+      .burger-menu.active .burger-line:nth-child(2) {
+        opacity: 0;
+      }
+
+      .burger-menu.active .burger-line:nth-child(3) {
+        transform: translateY(-13.5px) rotate(-45deg);
+      }
+
+      /* Navigation Sidebar */
+      .nav-sidebar {
+        position: fixed;
+        right: -100%;
+        top: 0;
+        width: 300px;
+        height: 100vh;
+        background: linear-gradient(
+          180deg,
+          rgba(10, 10, 10, 0.98) 0%,
+          rgba(26, 26, 26, 0.98) 100%
+        );
+        backdrop-filter: blur(20px);
+        z-index: 99;
+        transition: var(--transition);
+        padding: 100px 20px 20px;
+        overflow-y: auto;
+        box-shadow: -5px 0 30px rgba(0, 0, 0, 0.5);
+      }
+
+      .nav-sidebar.active {
+        right: 0;
+      }
+
+      .nav-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(5px);
+        z-index: 98;
+        opacity: 0;
+        visibility: hidden;
+        transition: var(--transition);
+      }
+
+      .nav-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .nav-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .nav-btn {
+        background: transparent;
+        color: var(--text-secondary);
+        border: 2px solid var(--brand-color);
+        padding: 1rem 1.5rem;
+        border-radius: 15px;
+        cursor: pointer;
+        font-size: 1.1rem;
+        font-weight: 600;
+        transition: var(--transition);
+        font-family: "Cairo", sans-serif;
+        text-align: right;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .nav-btn:hover,
+      .nav-btn.active {
+        background: var(--brand-color);
+        color: white;
+        transform: translateX(-5px);
+        box-shadow: 0 5px 20px var(--shadow);
+      }
+
+      /* Container */
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Section */
+      .menu-section {
+        display: none;
+        margin: 3rem 0 5rem;
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      .menu-section.active {
+        display: block;
+        animation: fadeUp 0.8s ease-out forwards;
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 3rem;
+        position: relative;
+        padding-top: 2rem;
+      }
+
+      .section-title h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        display: inline-block;
+        position: relative;
+        padding-bottom: 1rem;
+      }
+
+      .section-title h2::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--brand-color),
+          transparent
+        );
+        border-radius: 2px;
+      }
+
+      /* Product Grid */
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        padding: 1rem 0;
+      }
+
+      /* Product Card */
+      .product-card {
+        position: relative;
+        height: 420px;
+        border-radius: 20px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: var(--transition);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        background: var(--card-bg);
+      }
+
+      .product-card.slide-from-left {
+        transform: translateX(-100px);
+      }
+
+      .product-card.slide-from-right {
+        transform: translateX(100px);
+      }
+
+      .product-card.visible {
+        animation: slideIn 0.6s ease-out forwards;
+      }
+
+      .product-card:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 20px 50px var(--shadow);
+      }
+
+      .card-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition);
+      }
+
+      .product-card:hover .card-image {
+        transform: scale(1.1);
+      }
+
+      .card-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.95) 0%,
+          rgba(0, 0, 0, 0.6) 60%,
+          transparent 100%
+        );
+        padding: 2rem;
+        transition: var(--transition);
+      }
+
+      .product-card:hover .card-overlay {
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.98) 0%,
+          rgba(0, 0, 0, 0.8) 70%,
+          transparent 100%
+        );
+      }
+
+      .product-name {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: var(--text-primary);
+      }
+
+      .product-description {
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        margin-bottom: 1rem;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: var(--transition);
+        line-height: 1.5;
+      }
+
+      .product-card:hover .product-description {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .product-price {
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: var(--brand-color);
+        text-shadow: 0 0 20px rgba(226, 0, 4, 0.5);
+      }
+
+      /* Modal */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+        animation: fadeIn 0.3s ease-out;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .modal.active {
+        display: flex;
+      }
+
+      .modal-content {
+        background: var(--card-bg);
+        border-radius: 20px;
+        max-width: 500px;
+        width: 100%;
+        overflow: hidden;
+        box-shadow: 0 0 50px rgba(226, 0, 4, 0.3);
+        animation: scaleUp 0.3s ease-out;
+        border: 1px solid rgba(226, 0, 4, 0.3);
+      }
+
+      .modal-image {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+      }
+
+      .modal-header {
+        position: relative;
+        height: 300px;
+        overflow: hidden;
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        border: none;
+        font-size: 28px;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: var(--transition);
+        backdrop-filter: blur(5px);
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal-close:hover {
+        background: var(--brand-color);
+        transform: rotate(90deg);
+      }
+
+      .modal-body {
+        padding: 2rem;
+      }
+
+      .modal-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 1rem;
+      }
+
+      .modal-price {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--brand-color);
+        margin-bottom: 1.5rem;
+      }
+
+      .modal-description {
+        color: var(--text-secondary);
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin-bottom: 2rem;
+      }
+
+      .modal-button {
+        display: block;
+        width: 100%;
+        background: linear-gradient(135deg, #d32525 0%, #8c2f12 100%);
+        color: white;
+        border: none;
+        padding: 1rem;
+        border-radius: 12px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: var(--transition);
+        text-decoration: none;
+        text-align: center;
+        font-family: "Cairo", sans-serif;
+        margin-bottom: 10px;
+      }
+
+      .modal-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 30px rgba(226, 0, 4, 0.4);
+      }
+
+      /* Cart Button */
+      #cartButton {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: var(--brand-color);
+        color: white;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        box-shadow: 0 5px 20px var(--shadow);
+        z-index: 96;
+        transition: var(--transition);
+        border: none;
+      }
+
+      #cartButton:hover {
+        transform: scale(1.1);
+        box-shadow: 0 10px 30px var(--shadow);
+      }
+
+      #cartCount {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background: white;
+        color: var(--brand-color);
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+        font-weight: 800;
+      }
+
+      /* Cart Modal */
+      #cartModal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        z-index: 1002;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      #cartModal.active {
+        display: flex;
+      }
+
+      #cartContent {
+        background: var(--card-bg);
+        border-radius: 20px;
+        max-width: 600px;
+        width: 100%;
+        max-height: 80vh;
+        overflow-y: auto;
+        padding: 30px;
+        box-shadow: 0 0 50px rgba(226, 0, 4, 0.3);
+        border: 1px solid rgba(226, 0, 4, 0.3);
+      }
+
+      #cartContent h2 {
+        margin-bottom: 20px;
+        font-size: 2rem;
+        color: var(--text-primary);
+        border-bottom: 2px solid var(--brand-color);
+        padding-bottom: 10px;
+      }
+
+      #cartItems {
+        list-style: none;
+        margin-bottom: 20px;
+      }
+
+      #cartItems li {
+        margin-bottom: 15px;
+        font-size: 1.2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+      }
+
+      .remove-item {
+        background: var(--brand-color);
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.9rem;
+      }
+
+      #cartTotal {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--brand-color);
+        text-align: center;
+        margin: 20px 0;
+        padding: 15px;
+        background: rgba(226, 0, 4, 0.1);
+        border-radius: 10px;
+      }
+
+      #sendCart,
+      #clearCart {
+        margin-top: 10px;
+        padding: 15px 20px;
+        font-size: 1.2rem;
+        width: 100%;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 700;
+        transition: var(--transition);
+      }
+
+      #sendCart {
+        background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+        color: white;
+      }
+
+      #sendCart:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+      }
+
+      #clearCart {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--text-secondary);
+      }
+
+      #clearCart:hover {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+      }
+
+      /* Footer */
+      footer {
+        background: linear-gradient(
+          180deg,
+          rgba(26, 26, 26, 0.9) 0%,
+          rgba(10, 10, 10, 0.95) 100%
+        );
+        padding: 3rem 0 2rem;
+        text-align: center;
+        margin-top: 5rem;
+        border-top: 1px solid rgba(226, 0, 4, 0.2);
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .social-links a {
+        color: var(--text-secondary);
+        font-size: 2rem;
+        transition: var(--transition);
+        text-decoration: none;
+      }
+
+      .social-links a:hover {
+        color: var(--brand-color);
+        transform: translateY(-5px) scale(1.2);
+      }
+
+      .footer-text {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+      }
+
+      .footer-text p {
+        margin: 5px 0;
+      }
+
+      /* Animations */
+      @keyframes fadeUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideIn {
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slideDown {
+        from {
+          transform: translateY(-100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes scaleUp {
+        from {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      /* Responsive */
+      @media (max-width: 1024px) {
+        .product-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1.5rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .logo {
+          font-size: 1.8rem;
+        }
+
+        .logo-red {
+          font-size: 2.2rem;
+        }
+
+        .tagline {
+          font-size: 0.9rem;
+        }
+
+        .nav-sidebar {
+          width: 280px;
+        }
+
+        .nav-btn {
+          font-size: 1rem;
+        }
+
+        .section-title h2 {
+          font-size: 2rem;
+        }
+
+        .product-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .product-card {
+          height: 380px;
+        }
+
+        .product-name {
+          font-size: 1.3rem;
+        }
+
+        .product-price {
+          font-size: 1.5rem;
+        }
+
+        #cartButton {
+          width: 55px;
+          height: 55px;
+          font-size: 1.3rem;
+          bottom: 20px;
+          right: 20px;
+        }
+
+        .modal-content {
+          max-width: 95vw;
+        }
+
+        .modal-title {
+          font-size: 1.5rem;
+        }
+
+        .modal-price {
+          font-size: 1.5rem;
+        }
+
+        .modal-description {
+          font-size: 1rem;
+        }
+
+        .modal-button {
+          font-size: 1rem;
+        }
+
+        #cartContent {
+          padding: 20px;
+        }
+
+        #cartContent h2 {
+          font-size: 1.5rem;
+        }
+
+        #cartItems li {
+          font-size: 1rem;
+        }
+
+        .social-links a {
+          font-size: 1.5rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .logo {
+          font-size: 1.5rem;
+        }
+
+        .logo-red {
+          font-size: 1.8rem;
+        }
+
+        .tagline {
+          font-size: 0.8rem;
+        }
+
+        .burger-menu {
+          width: 30px;
+          height: 25px;
+        }
+
+        .nav-sidebar {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-content">
+        <div class="burger-menu" id="burgerMenu">
+          <div class="burger-line"></div>
+          <div class="burger-line"></div>
+          <div class="burger-line"></div>
+        </div>
+        <div class="logo">
+          <span class="logo-red">O<sub>2</sub></span> Restaurant
+        </div>
+        <div style="width: 35px"></div>
+      </div>
+      <div class="tagline">
+        مطعم O2 يقدم تجربة طعام متكاملة تجمع بين الشاورما والحلويات والمشروبات
+      </div>
+    </header>
+
+    <div class="nav-overlay" id="navOverlay"></div>
+    <nav class="nav-sidebar" id="navSidebar">
+      <div class="nav-buttons" id="navButtons"></div>
+    </nav>
+
+    <div class="container" id="menuContainer"></div>
+
+    <!-- Product Modal -->
+    <div class="modal" id="productModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <img id="modalImage" src="" alt="Product" class="modal-image" />
+          <button class="modal-close" onclick="closeModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <h2 class="modal-title" id="modalTitle"></h2>
+          <div class="modal-price" id="modalPrice"></div>
+          <p class="modal-description" id="modalDesc"></p>
+          <button class="modal-button" id="addToCartBtn">
+            <i class="fas fa-cart-plus"></i> أضف إلى السلة
+          </button>
+          <a href="#" id="modalButton" target="_blank" class="modal-button">
+            <i class="fab fa-whatsapp"></i> اطلب الآن عبر واتساب
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cart Button -->
+    <button id="cartButton">
+      <i class="fas fa-shopping-cart"></i>
+      <span id="cartCount" style="display: none">0</span>
+    </button>
+
+    <!-- Cart Modal -->
+    <div id="cartModal">
+      <div id="cartContent">
+        <h2><i class="fas fa-shopping-basket"></i> سلة الطلبات</h2>
+        <ul id="cartItems"></ul>
+        <div id="cartTotal">المجموع: 0 ₪</div>
+        <button id="sendCart">
+          <i class="fab fa-whatsapp"></i> أرسل الطلب على واتساب
+        </button>
+        <button id="clearCart"><i class="fas fa-trash"></i> إفراغ السلة</button>
+      </div>
+    </div>
+
+    <footer>
+      <div class="social-links">
+        <a
+          href="https://www.facebook.com/people/O2-Gaza/61575394190251/"
+          target="_blank"
+        >
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a href="https://www.instagram.com/o2gaza1/" target="_blank">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a
+          href="https://www.tiktok.com/@o2gaza1/video/7511301593443224839"
+          target="_blank"
+        >
+          <i class="fab fa-tiktok"></i>
+        </a>
+        <a
+          href="https://chat.whatsapp.com/I9v3jzaRNLP4wLijzK1Y4p"
+          target="_blank"
+        >
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </div>
+      <div class="footer-text">
+        <p>© 2024 O2 Restaurant - Gaza. جميع الحقوق محفوظة.</p>
+        <p>غزة - فلسطين | نقدم لكم أفضل تجربة طعام</p>
+      </div>
+    </footer>
+
+    <script>
+      // تم دمج الصور مباشرة داخل كل منتج لتسهيل التعديل الفردي
+      const menuData = {
+        shawarma: {
+          title: "🌯 الشاورما",
+          items: [
+            {
+              name: "بيتا شاورما",
+              price: 10,
+              image:
+                "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=800&q=80",
+            },
+            {
+              name: "شاورما عادي",
+              price: 15,
+              image:
+                "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=800&q=80",
+            },
+            {
+              name: "فرشوحه دبل",
+              price: 17,
+              image:
+                "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=800&q=80",
+            },
+            {
+              name: "فرشوحه دبل لحمة",
+              price: 17,
+              image:
+                "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=800&q=80",
+            },
+            {
+              name: "فرشوحه دبل دبل",
+              price: 25,
+              image:
+                "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=800&q=80",
+            },
+            {
+              name: "سوري",
+              price: 35,
+              image:
+                "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=800&q=80",
+            },
+            {
+              name: "صفيحة",
+              price: 38,
+              desc: "شاورما وجبنة وخبزة صاج وزيتون وبتعمل بانيه بنحط على بقسماط",
+              image:
+                "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=800&q=80",
+            },
+            {
+              name: "باشكا",
+              price: 40,
+              desc: "خبز فينو محشو بشاورما، زيتون، جبنة، وصوص خاص",
+              image:
+                "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=800&q=80",
+            },
+            {
+              name: "صاروخ",
+              price: 35,
+              image:
+                "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=800&q=80",
+            },
+            {
+              name: "شاورما عربي",
+              price: 38,
+              image:
+                "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=800&q=80",
+            },
+            {
+              name: "شاورما نابلسي",
+              price: 38,
+              desc: "شاورما بالجبنة",
+              image:
+                "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=800&q=80",
+            },
+            {
+              name: "صحن شاورما كبير",
+              price: 30,
+              image:
+                "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=800&q=80",
+            },
+            {
+              name: "صحن شاورما صغير",
+              price: 20,
+              image:
+                "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=800&q=80",
+            },
+          ],
+        },
+        easternSweets: {
+          title: "🍯 الحلويات الشرقية",
+          items: [
+            {
+              name: "بلورية حلبي",
+              price: 130,
+              image:
+                "https://images.unsplash.com/photo-1571167530149-c6f274f6db8f?w=800&q=80",
+            },
+            {
+              name: "دولمة حلبي",
+              price: 130,
+              image:
+                "https://images.unsplash.com/photo-1571167530149-c6f274f6db8f?w=800&q=80",
+            },
+            {
+              name: "بورما حلبي",
+              price: 100,
+              image:
+                "https://images.unsplash.com/photo-1571167530149-c6f274f6db8f?w=800&q=80",
+            },
+            {
+              name: "بقلاوة حلبي",
+              price: 100,
+              image:
+                "https://images.unsplash.com/photo-1571167530149-c6f274f6db8f?w=800&q=80",
+            },
+            {
+              name: "كاسات مكسرات",
+              price: 80,
+              image:
+                "https://images.unsplash.com/photo-1571167530149-c6f274f6db8f?w=800&q=80",
+            },
+            {
+              name: "بقلاوة عين جمل",
+              price: 55,
+              image:
+                "https://images.unsplash.com/photo-1571167530149-c6f274f6db8f?w=800&q=80",
+            },
+            {
+              name: "نابلسية",
+              price: 50,
+              image:
+                "https://images.unsplash.com/photo-1571167530149-c6f274f6db8f?w=800&q=80",
+            },
+            {
+              name: "بقلاوة لوز",
+              price: 48,
+              image:
+                "https://images.unsplash.com/photo-1571167530149-c6f274f6db8f?w=800&q=80",
+            },
+            {
+              name: "أساور لوز",
+              price: 48,
+              image:
+                "https://images.unsplash.com/photo-1571167530149-c6f274f6db8f?w=800&q=80",
+            },
+            {
+              name: "كنافة عربية",
+              price: 40,
+              image:
+                "https://images.unsplash.com/photo-1571167530149-c6f274f6db8f?w=800&q=80",
+            },
+            {
+              name: "بسبوسة نوتيلا",
+              price: 40,
+              image:
+                "https://images.unsplash.com/photo-1571167530149-c6f274f6db8f?w=800&q=80",
+            },
+            {
+              name: "عش البلبل",
+              price: 35,
+              image:
+                "https://images.unsplash.com/photo-1571167530149-c6f274f6db8f?w=800&q=80",
+            },
+            {
+              name: "سنيورة",
+              price: 35,
+              image:
+                "https://images.unsplash.com/photo-1571167530149-c6f274f6db8f?w=800&q=80",
+            },
+            {
+              name: "كلّ وشكر",
+              price: 35,
+              image:
+                "https://images.unsplash.com/photo-1571167530149-c6f274f6db8f?w=800&q=80",
+            },
+            {
+              name: "إسطنبولية",
+              price: 35,
+              image:
+                "https://images.unsplash.com/photo-1571167530149-c6f274f6db8f?w=800&q=80",
+            },
+            {
+              name: "كلاج",
+              price: 30,
+              image:
+                "https://images.unsplash.com/photo-1571167530149-c6f274f6db8f?w=800&q=80",
+            },
+            {
+              name: "نمورة",
+              price: 25,
+              image:
+                "https://images.unsplash.com/photo-1571167530149-c6f274f6db8f?w=800&q=80",
+            },
+            {
+              name: "بسبوسة بالقشطة",
+              price: 25,
+              image:
+                "https://images.unsplash.com/photo-1571167530149-c6f274f6db8f?w=800&q=80",
+            },
+          ],
+        },
+        westernSweets: {
+          title: "🍰 الكيك والحلويات الغربية",
+          items: [
+            {
+              name: "قالب كيك صغير",
+              price: 60,
+              image:
+                "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800&q=80",
+            },
+            {
+              name: "قالب كيك كبير",
+              price: 80,
+              image:
+                "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800&q=80",
+            },
+            {
+              name: "قالب نص بلاطة",
+              price: 150,
+              image:
+                "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800&q=80",
+            },
+            {
+              name: "قطع كيك كلاسيك",
+              price: 8,
+              image:
+                "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800&q=80",
+            },
+            {
+              name: "سويس رول",
+              price: 8,
+              image:
+                "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800&q=80",
+            },
+            {
+              name: "تريلتشا",
+              price: 10,
+              image:
+                "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800&q=80",
+            },
+            {
+              name: "كريب شوكولاتة",
+              price: 15,
+              image:
+                "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800&q=80",
+            },
+            {
+              name: "كريب (نوتيلا / بيستاشيو / لوتس)",
+              price: 30,
+              image:
+                "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800&q=80",
+            },
+            {
+              name: "رينجز",
+              price: 25,
+              image:
+                "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800&q=80",
+            },
+            {
+              name: "لقيمات شوكولاتة",
+              price: 15,
+              image:
+                "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800&q=80",
+            },
+            {
+              name: "لقيمات (نوتيلا / بيستاشيو / لوتس)",
+              price: 30,
+              image:
+                "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800&q=80",
+            },
+            {
+              name: "بان كيك شوكولاتة",
+              price: 15,
+              image:
+                "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800&q=80",
+            },
+            {
+              name: "بان كيك (نوتيلا / بيستاشيو / لوتس)",
+              price: 30,
+              image:
+                "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800&q=80",
+            },
+            {
+              name: "سوبريم",
+              price: 20,
+              image:
+                "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800&q=80",
+            },
+            {
+              name: "كرانش بار",
+              price: 15,
+              image:
+                "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800&q=80",
+            },
+          ],
+        },
+        sandwiches: {
+          title: "🍔 السندويشات الغربية",
+          items: [
+            {
+              name: "تشكن بيتزا",
+              price: 25,
+              desc: "مشروم، فليفلة، كريمة، دجاج طازج، وبصل",
+              image:
+                "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&q=80",
+            },
+            {
+              name: "شيش طاووق",
+              price: 25,
+              desc: "فخذ دجاج متبّل مع فليفلة ملوّنة وبصل",
+              image:
+                "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&q=80",
+            },
+            {
+              name: "برجر",
+              price: 25,
+              image:
+                "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&q=80",
+            },
+            {
+              name: "زينجر",
+              price: 25,
+              desc: "شرائح صدر دجاج متبّلة مع بندورة طازجة، جرجير، حلقات بصل، وصوص خاص",
+              image:
+                "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&q=80",
+            },
+            {
+              name: "فطيرة الذهبية",
+              price: 25,
+              desc: "صوص خاص",
+              image:
+                "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&q=80",
+            },
+            {
+              name: "بيغ ماك",
+              price: 35,
+              image:
+                "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&q=80",
+            },
+            {
+              name: "شيبس كبير",
+              price: 10,
+              image:
+                "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&q=80",
+            },
+            {
+              name: "شيبس صغير",
+              price: 5,
+              image:
+                "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&q=80",
+            },
+          ],
+        },
+        italian: {
+          title: "🍝 الإيطالي",
+          items: [
+            {
+              name: "كاليزوني دجاج",
+              price: 25,
+              image:
+                "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=800&q=80",
+            },
+            {
+              name: "كاليزوني خضار",
+              price: 15,
+              image:
+                "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=800&q=80",
+            },
+            {
+              name: "ميجا",
+              price: 30,
+              desc: "خبزة الكالزوني...",
+              image:
+                "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=800&q=80",
+            },
+            {
+              name: "بيتزا مكسيكي دجاج",
+              price: 25,
+              desc: "بيتزا خضار مع صدر الدجاج وجبنه ايمك",
+              image:
+                "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=800&q=80",
+            },
+            {
+              name: "بيتزا خضار",
+              price: 20,
+              image:
+                "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=800&q=80",
+            },
+            {
+              name: "بيتزا ذرة",
+              price: 20,
+              image:
+                "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=800&q=80",
+            },
+            {
+              name: "بيتزا أناناس",
+              price: 20,
+              image:
+                "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=800&q=80",
+            },
+            {
+              name: "مارجريتا",
+              price: 20,
+              image:
+                "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=800&q=80",
+            },
+            {
+              name: "نابولي",
+              price: 20,
+              desc: "بيتزا بالتونة والزيتون",
+              image:
+                "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=800&q=80",
+            },
+            {
+              name: "صوص إضافي",
+              price: 3,
+              image:
+                "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=800&q=80",
+            },
+          ],
+        },
+        drinks: {
+          title: "🥤 المشروبات",
+          items: [
+            {
+              name: "عصير الموسم",
+              price: 12,
+              image:
+                "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&q=80",
+            },
+            {
+              name: "ليمون ونعنع",
+              price: 12,
+              image:
+                "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&q=80",
+            },
+            {
+              name: "أفوكادو",
+              price: 18,
+              image:
+                "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&q=80",
+            },
+            {
+              name: "آيس موكا",
+              price: 12,
+              image:
+                "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&q=80",
+            },
+            {
+              name: "آيس كافي",
+              price: 12,
+              image:
+                "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&q=80",
+            },
+            {
+              name: "آيس كريم",
+              price: 3,
+              image:
+                "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&q=80",
+            },
+            {
+              name: "نسكافيه",
+              price: 7,
+              image:
+                "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&q=80",
+            },
+            {
+              name: "كابتشينو",
+              price: 10,
+              image:
+                "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&q=80",
+            },
+            {
+              name: "إسبريسو سنجل",
+              price: 7,
+              image:
+                "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&q=80",
+            },
+            {
+              name: "إسبريسو دبل",
+              price: 10,
+              image:
+                "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&q=80",
+            },
+            {
+              name: "قهوة تركي",
+              price: 5,
+              image:
+                "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&q=80",
+            },
+            {
+              name: "مشروب غازي",
+              price: 10,
+              image:
+                "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&q=80",
+            },
+            {
+              name: "موهيتو",
+              price: 30,
+              image:
+                "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&q=80",
+            },
+            {
+              name: "مولتن كيك",
+              price: 25,
+              image:
+                "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&q=80",
+            },
+            {
+              name: "براونيز",
+              price: 25,
+              image:
+                "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&q=80",
+            },
+            {
+              name: "كريب دبي",
+              price: 30,
+              image:
+                "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&q=80",
+            },
+          ],
+        },
+        salads: {
+          title: "🥗 السلطات",
+          items: [
+            {
+              name: "سلطة كبيرة",
+              price: 10,
+              image:
+                "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80",
+            },
+            {
+              name: "سلطة صغيرة",
+              price: 5,
+              image:
+                "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80",
+            },
+            {
+              name: "بطاطا كبيرة",
+              price: 10,
+              image:
+                "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80",
+            },
+            {
+              name: "بطاطا صغيرة",
+              price: 5,
+              image:
+                "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80",
+            },
+          ],
+        },
+      };
+
+      let cart = [];
+      const burgerMenu = document.getElementById("burgerMenu");
+      const navSidebar = document.getElementById("navSidebar");
+      const navOverlay = document.getElementById("navOverlay");
+      const navButtons = document.getElementById("navButtons");
+      const menuContainer = document.getElementById("menuContainer");
+      const productModal = document.getElementById("productModal");
+      const cartButton = document.getElementById("cartButton");
+      const cartModal = document.getElementById("cartModal");
+      const cartItems = document.getElementById("cartItems");
+      const cartCount = document.getElementById("cartCount");
+      const cartTotal = document.getElementById("cartTotal");
+      const sendCart = document.getElementById("sendCart");
+      const clearCart = document.getElementById("clearCart");
+
+      // Burger Menu Toggle
+      burgerMenu.addEventListener("click", () => {
+        burgerMenu.classList.toggle("active");
+        navSidebar.classList.toggle("active");
+        navOverlay.classList.toggle("active");
+      });
+
+      navOverlay.addEventListener("click", () => {
+        burgerMenu.classList.remove("active");
+        navSidebar.classList.remove("active");
+        navOverlay.classList.remove("active");
+      });
+
+      // Create Navigation Buttons
+      Object.keys(menuData).forEach((key, index) => {
+        const btn = document.createElement("button");
+        btn.className = "nav-btn";
+        btn.innerHTML = `<i class="fas fa-chevron-left"></i> ${menuData[key].title}`;
+        btn.onclick = () => {
+          showSection(key);
+          burgerMenu.classList.remove("active");
+          navSidebar.classList.remove("active");
+          navOverlay.classList.remove("active");
+        };
+        if (index === 0) btn.classList.add("active");
+        navButtons.appendChild(btn);
+      });
+
+      // Create Menu Sections
+      Object.keys(menuData).forEach((key, index) => {
+        const section = document.createElement("section");
+        section.className = "menu-section";
+        section.id = key;
+        if (index === 0) section.classList.add("active");
+
+        const sectionTitle = document.createElement("div");
+        sectionTitle.className = "section-title";
+        sectionTitle.innerHTML = `<h2>${menuData[key].title}</h2>`;
+
+        const grid = document.createElement("div");
+        grid.className = "product-grid";
+
+        menuData[key].items.forEach((item, itemIndex) => {
+          const card = document.createElement("div");
+          card.className = "product-card";
+          card.classList.add(
+            itemIndex % 2 === 0 ? "slide-from-right" : "slide-from-left"
+          );
+          card.style.animationDelay = `${itemIndex * 0.1}s`;
+
+          const img = document.createElement("img");
+          // Here we use the individual item image instead of category image
+          img.src = item.image;
+          img.alt = item.name;
+          img.className = "card-image";
+
+          const overlay = document.createElement("div");
+          overlay.className = "card-overlay";
+
+          const name = document.createElement("div");
+          name.className = "product-name";
+          name.textContent = item.name;
+
+          const price = document.createElement("div");
+          price.className = "product-price";
+          price.textContent = `${item.price} ₪`;
+
+          overlay.appendChild(name);
+
+          if (item.desc) {
+            const desc = document.createElement("div");
+            desc.className = "product-description";
+            desc.textContent = item.desc;
+            overlay.appendChild(desc);
+          }
+
+          overlay.appendChild(price);
+          card.appendChild(img);
+          card.appendChild(overlay);
+          // Pass the item object directly to openModal
+          card.onclick = () => openModal(item);
+          grid.appendChild(card);
+        });
+
+        section.appendChild(sectionTitle);
+        section.appendChild(grid);
+        menuContainer.appendChild(section);
+      });
+
+      function showSection(sectionId) {
+        document
+          .querySelectorAll(".menu-section")
+          .forEach((s) => s.classList.remove("active"));
+        const selectedSection = document.getElementById(sectionId);
+        selectedSection.classList.add("active");
+
+        document.querySelectorAll(".nav-btn").forEach((btn, index) => {
+          btn.classList.remove("active");
+          if (
+            btn.textContent.includes(menuData[sectionId].title.split(" ")[1])
+          ) {
+            btn.classList.add("active");
+          }
+        });
+
+        const cards = selectedSection.querySelectorAll(".product-card");
+        cards.forEach((card) => {
+          card.classList.remove("visible");
+          void card.offsetWidth; // Trigger reflow
+          card.classList.add("visible");
+        });
+      }
+
+      let currentItem = null;
+
+      function openModal(item) {
+        currentItem = item;
+        document.getElementById("modalTitle").textContent = item.name;
+        document.getElementById("modalPrice").textContent = `${item.price} ₪`;
+        document.getElementById("modalDesc").textContent = item.desc || "";
+        // Use the item's specific image
+        document.getElementById("modalImage").src = item.image;
+
+        const message = encodeURIComponent(
+          `مرحبا، أريد طلب: ${item.name} بسعر ${item.price} ₪`
+        );
+        document.getElementById(
+          "modalButton"
+        ).href = `https://wa.me/972566666144?text=${message}`;
+
+        productModal.classList.add("active");
+      }
+
+      function closeModal() {
+        productModal.classList.remove("active");
+      }
+
+      productModal.addEventListener("click", (e) => {
+        if (e.target === productModal) closeModal();
+      });
+
+      // Cart Logic
+      document.getElementById("addToCartBtn").onclick = () => {
+        if (currentItem) {
+          addToCart(currentItem);
+          closeModal();
+          showNotification("تمت الإضافة للسلة");
+        }
+      };
+
+      function addToCart(item) {
+        cart.push(item);
+        updateCartUI();
+        cartButton.style.transform = "scale(1.2)";
+        setTimeout(() => (cartButton.style.transform = "scale(1)"), 200);
+      }
+
+      function removeFromCart(index) {
+        cart.splice(index, 1);
+        updateCartUI();
+      }
+
+      function updateCartUI() {
+        cartItems.innerHTML = "";
+        let total = 0;
+
+        cart.forEach((item, index) => {
+          total += item.price;
+          const li = document.createElement("li");
+          li.innerHTML = `
+            <span>${item.name} (${item.price} ₪)</span>
+            <button class="remove-item" onclick="removeFromCart(${index})">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
+          cartItems.appendChild(li);
+        });
+
+        cartTotal.textContent = `المجموع: ${total} ₪`;
+        cartCount.textContent = cart.length;
+        cartCount.style.display = cart.length > 0 ? "flex" : "none";
+      }
+
+      function showNotification(msg) {
+        const notif = document.createElement("div");
+        notif.textContent = msg;
+        notif.style.position = "fixed";
+        notif.style.bottom = "100px";
+        notif.style.left = "50%";
+        notif.style.transform = "translateX(-50%)";
+        notif.style.background = "var(--brand-color)";
+        notif.style.color = "white";
+        notif.style.padding = "10px 20px";
+        notif.style.borderRadius = "20px";
+        notif.style.zIndex = "2000";
+        notif.style.animation = "fadeIn 0.3s";
+        document.body.appendChild(notif);
+        setTimeout(() => notif.remove(), 2000);
+      }
+
+      cartButton.onclick = () => cartModal.classList.add("active");
+
+      cartModal.addEventListener("click", (e) => {
+        if (e.target === cartModal) cartModal.classList.remove("active");
+      });
+
+      clearCart.onclick = () => {
+        cart = [];
+        updateCartUI();
+      };
+
+      sendCart.onclick = () => {
+        if (cart.length === 0) return;
+
+        let message = "مرحبا، أريد طلب القائمة التالية:%0a";
+        let total = 0;
+
+        cart.forEach((item) => {
+          message += `- ${item.name} (${item.price} ₪)%0a`;
+          total += item.price;
+        });
+
+        message += `%0aالمجموع الكلي: ${total} ₪`;
+        window.open(`https://wa.me/972566666144?text=${message}`, "_blank");
+      };
+
+      // Initialize first section animations
+      setTimeout(() => showSection("shawarma"), 100);
+    </script>
+  </body>
+</html>
