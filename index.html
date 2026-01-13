@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
     <title>O2 Restaurant - Gaza | قائمة الطعام</title>
     <link
@@ -33,6 +33,12 @@
         -webkit-tap-highlight-color: transparent;
       }
 
+      /* === إضافات لمنع الإزاحة الأفقية === */
+      html {
+        overflow-x: hidden;
+        width: 100%;
+      }
+
       body {
         font-family: "Cairo", sans-serif;
         background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1a1a 100%);
@@ -41,6 +47,8 @@
         overflow-x: hidden;
         min-height: 100vh;
         touch-action: pan-y;
+        width: 100%;
+        max-width: 100vw;
       }
 
       header {
@@ -51,6 +59,7 @@
         top: 0;
         z-index: 1000;
         border-bottom: 1px solid rgba(226, 0, 4, 0.2);
+        width: 100%;
       }
 
       .header-content {
@@ -60,6 +69,7 @@
         max-width: 1400px;
         margin: 0 auto;
         padding: 0 clamp(10px, 3vw, 15px);
+        width: 100%;
       }
 
       .logo {
@@ -71,7 +81,7 @@
       }
       .logo-red {
         color: var(--brand-color);
-        font-size: clamp(2.5rem, 4vw, 1.8rem);
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
         font-weight: 800;
       }
       .logo-red sub {
@@ -181,6 +191,8 @@
         margin: 0 auto;
         padding: clamp(5px, 2vw, 10px) clamp(10px, 3vw, 15px)
           clamp(70px, 15vh, 80px);
+        width: 100%;
+        overflow-x: hidden;
       }
       .menu-section {
         display: none;
@@ -203,24 +215,13 @@
       .product-grid {
         display: grid;
         gap: clamp(10px, 2.5vw, 15px);
-        grid-template-columns: repeat(auto-fill, minmax(min(150px, 100%), 1fr));
+        grid-template-columns: repeat(2, 1fr);
+        width: 100%;
       }
 
-      @media (min-width: 360px) {
-        .product-grid {
-          grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-        }
-      }
-
-      @media (min-width: 480px) {
+      @media (min-width: 500px) {
         .product-grid {
           grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-        }
-      }
-
-      @media (min-width: 640px) {
-        .product-grid {
-          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
         }
       }
 
@@ -252,6 +253,7 @@
         opacity: 0;
         transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         touch-action: manipulation;
+        width: 100%;
       }
 
       .reveal-right {
@@ -319,7 +321,6 @@
         box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
       }
 
-      /* الخط الأحمر */
       .no-delivery-badge::after {
         content: "";
         position: absolute;
@@ -365,7 +366,7 @@
       }
       .modal-image {
         width: 100%;
-        height: clamp(180px, 35vw, 280px);
+        height: clamp(200px, 35vw, 300px);
         object-fit: cover;
       }
       .modal-body {
@@ -418,10 +419,7 @@
 
       .weight-selector {
         display: grid;
-        grid-template-columns: repeat(
-          auto-fit,
-          minmax(clamp(70px, 18vw, 80px), 1fr)
-        );
+        grid-template-columns: repeat(4, 1fr);
         gap: clamp(6px, 2vw, 8px);
         margin: clamp(12px, 3vw, 15px) 0;
       }
@@ -435,7 +433,7 @@
         font-family: inherit;
         font-weight: 600;
         transition: 0.3s;
-        font-size: clamp(0.85rem, 2.5vw, 0.9rem);
+        font-size: clamp(0.8rem, 2.5vw, 0.9rem);
         touch-action: manipulation;
       }
       .weight-btn.active {
@@ -609,11 +607,13 @@
         border-radius: clamp(8px, 2vw, 10px);
         margin-bottom: clamp(8px, 2vw, 10px);
         gap: clamp(8px, 2vw, 10px);
+        flex-wrap: wrap;
       }
       .cart-item-info {
         flex: 1;
         text-align: right;
         font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+        min-width: 0;
       }
 
       .cart-qty-controls {
@@ -718,6 +718,7 @@
         margin: clamp(8px, 2vw, 10px) 0;
         direction: rtl;
         overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
       }
 
       .invoice-header {
@@ -751,6 +752,7 @@
         margin-bottom: clamp(6px, 2vw, 8px);
         font-size: clamp(0.8rem, 2.3vw, 0.9rem);
         align-items: flex-start;
+        flex-wrap: wrap;
       }
 
       .invoice-customer-row:last-child {
@@ -775,7 +777,7 @@
         border-collapse: collapse;
         margin-bottom: clamp(12px, 3vw, 15px);
         font-size: clamp(0.7rem, 2vw, 0.8rem);
-        min-width: 300px;
+        min-width: 280px;
       }
 
       .invoice-table th {
@@ -1151,17 +1153,6 @@
                 maxlength="10"
               />
             </div>
-            <div class="form-group">
-              <label
-                ><i class="fas fa-map-marker-alt"></i> العنوان بالتفصيل *</label
-              >
-              <textarea
-                id="customerAddress"
-                placeholder="مثال: حي الشيخ رضوان، شارع الجلاء، بجانب مسجد..."
-                required
-              ></textarea>
-            </div>
-
             <!-- Province Select -->
             <div class="form-group">
               <label><i class="fas fa-city"></i> المحافظة *</label>
@@ -1183,6 +1174,17 @@
               <div id="deliveryPriceDisplay" class="delivery-price-display">
                 رسوم التوصيل: 0 ₪
               </div>
+            </div>
+
+            <div class="form-group">
+              <label
+                ><i class="fas fa-map-marker-alt"></i> العنوان بالتفصيل *</label
+              >
+              <textarea
+                id="customerAddress"
+                placeholder="مثال: حي الشيخ رضوان، شارع الجلاء، بجانب مسجد..."
+                required
+              ></textarea>
             </div>
 
             <button type="submit" class="modal-button btn-add">
@@ -1282,22 +1284,22 @@
             {
               name: "بيتا شاورما",
               price: 10,
-              image: ".\\img\\Shawarma-section\\5O1A7165 copy.jpg",
+              image: "./img/Shawarma-section/5O1A7165 copy.jpg",
             },
             {
               name: "شاورما عادي",
               price: 15,
-              image: ".\\img\\Shawarma-section\\5O1A7105 copy.jpg",
+              image: "./img/Shawarma-section/5O1A7105 copy.jpg",
             },
             {
               name: "فرشوحه دبل",
               price: 17,
-              image: ".\\img\\Shawarma-section\\5O1A7108 copy.jpg",
+              image: "./img/Shawarma-section/5O1A7108 copy.jpg",
             },
             {
               name: "فرشوحه دبل لحمة",
-              price: 17,
-              image: ".\\img\\Shawarma-section\\5O1A7124 copy.jpg",
+              price: 23,
+              image: "./img/Shawarma-section/5O1A7124 copy.jpg",
             },
             {
               name: "فرشوحه دبل دبل",
@@ -1309,18 +1311,18 @@
             {
               name: "سوري",
               price: 35,
-              image: ".\\img\\Shawarma-section\\5O1A7153 copy.jpg",
+              image: "./img/Shawarma-section/5O1A7153 copy.jpg",
             },
             {
               name: "صفيحة",
               price: 38,
-              desc: "شاورما وجبنة وخبزة صاج وزيتون",
-              image: ".\\img\\Shawarma-section\\5O1A7095 copy.jpg",
+              desc: "شاورما - جبنة - زيتون اسود",
+              image: "./img/Shawarma-section/5O1A7095 copy.jpg",
             },
             {
               name: "باشكا",
               price: 40,
-              desc: "خبز فينو محشو بشاورما، زيتون، جبنة",
+              desc: "خبزة باشكا - شاورما - جبنة - زيتون - صوص بيكانتي",
               image:
                 "https://images.unsplash.com/photo-1607532941433-304659e8198a?w=800&q=80",
             },
@@ -1333,13 +1335,14 @@
             {
               name: "شاورما عربي",
               price: 38,
+              desc: "قطع شاورما - جبنة - زيتون اسود",
               image:
                 "https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=80",
             },
             {
               name: "شاورما نابلسي",
               price: 38,
-              desc: "شاورما بالجبنة",
+              desc: "شاورما - بطاطا - صوص بيكانتي - جبنة - زيتون اسود",
               image:
                 "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=800&q=80",
             },
@@ -1357,72 +1360,136 @@
             },
           ],
         },
+        italian: {
+          title: "🍕 الإيطالي",
+          items: [
+            {
+              name: "كاليزوني دجاج",
+              price: 25,
+              desc: "صدر دجاج - جبنة - زيتون - رانش ",
+              image: "./img/Italian-section/5K7A6147 copy.jpg",
+            },
+            {
+              name: "كاليزوني خضار",
+              price: 15,
+              desc: "فليفلة - بصل - ذرة - مشروم - زيتون",
+              image: "./img/Italian-section/5O1A6437 copy.jpg",
+            },
+            {
+              name: "بيتزا مكسيكي دجاج",
+              price: 25,
+              desc: "صدر دجاج - جبنة - زيتون",
+              image: "./img/Italian-section/5O1A6414 copy.jpg",
+            },
+            {
+              name: "ميجا",
+              price: 30,
+              desc: "صدر دجاج - فليفلة - مشروم - جرادة - بصل - كريمة طعام",
+              image: "./img/Italian-section/5O1A6511 copy.jpg",
+            },
+            {
+              name: "بيتزا خضار",
+              price: 20,
+              desc: "فليفلة - مشروم - زيتون - ذرة ",
+              image: "./img/Italian-section/boto.png",
+            },
+            {
+              name: "بيتزا ذرة",
+              desc: "ذرة",
+              price: 20,
+              image: "./img/Italian-section/boto-2.png",
+            },
+            {
+              name: "بيتزا ماما روزا بالاناناس",
+              price: 20,
+              desc: "أناناس",
+              image:
+                "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=800&q=80",
+            },
+            {
+              name: "نابولي",
+              price: 20,
+              desc: "بيتزا بالتونة والزيتون",
+              image:
+                "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800&q=80",
+            },
+            {
+              name: "مارجريتا",
+              price: 20,
+              desc: "جبنة",
+              image:
+                "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=800&q=80",
+            },
+            {
+              name: "صوص إضافي",
+              price: 3,
+              image:
+                "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=800&q=80",
+            },
+          ],
+        },
+        sandwiches: {
+          title: "🍔 السندويشات الغربية",
+          items: [
+            {
+              name: "زينجر",
+              price: 25,
+              desc: "شرائح صدر دجاج متبّلة مع بندورة طازجة، جرجير، حلقات بصل",
+              image: "./img/Western-Food-Section/5O1A7321 copy.jpg",
+            },
+            {
+              name: " بيف برجر",
+              price: 25,
+              desc: "قطعة لحمة - بصل - بندورة - جبنة - مخلل - صوص بيكانتي",
+              image: "./img/Western-Food-Section/5O1A7361 copy.jpg",
+            },
+            {
+              name: "بيغ ماك",
+              price: 35,
+              desc: "قطعتين لحمة - بصل - بندورة - جبنة - مخلل - صوص بيكانتي",
+              image:
+                "https://images.unsplash.com/photo-1550547660-d9450f859349?w=800&q=80",
+            },
+            {
+              name: "تشكن بيتزا",
+              price: 25,
+              desc: "صدر دجاج - مشروم - فليفلة - بصل - زيتون اسود - جبنة",
+              image: "./img/Western-Food-Section/5O1A7343 copy.jpg",
+            },
+            {
+              name: "شيش طاووق",
+              price: 25,
+              desc: "فخد دجاج - جرجير - بندورة -مخلل -صوص بيكانتي",
+              image: "./img/Western-Food-Section/5O1A7381 copy.jpg",
+            },
+            {
+              name: "فطيرة الذهبية",
+              price: 25,
+              desc: "صدر دجاج - فليفلة - بصل - زيتون اسود - جبنة - ذرة - كريمة طعام",
+              image: "./img/Western-Food-Section/5O1A7260 copy.jpg",
+            },
+          ],
+        },
         easternSweets: {
           title: "🍯 الحلويات الشرقية",
           byWeight: true,
           items: [
             {
-              name: "بلورية حلبي",
-              pricePerKg: 130,
+              name: "نمورة",
+              pricePerKg: 25,
+              image: "./img/Oriental-Sweets-Section/5K7A6219 copy.jpg",
+            },
+            {
+              name: "بسبوسة بالقشطة",
+              pricePerKg: 25,
               image:
-                "https://images.unsplash.com/photo-1571167530149-c6f274f6db8f?w=800&q=80",
+                "https://images.unsplash.com/photo-1602351447937-745cb720612f?w=800&q=80",
             },
             {
-              name: "دولمة حلبي",
-              pricePerKg: 130,
-              image: ".\\img\\Oriental-Sweets-Section\\5K7A6213 copy.jpg",
-            },
-            {
-              name: "بورما حلبي",
-              pricePerKg: 100,
-              image:
-                "https://images.unsplash.com/photo-1599599810769-bcde5a160d32?w=800&q=80",
-              delivery: false,
-            },
-            {
-              name: "بقلاوة حلبي",
-              pricePerKg: 100,
-              image:
-                "https://images.unsplash.com/photo-1519676867240-f03562e64548?w=800&q=80",
-            },
-            {
-              name: "كاسات مكسرات",
-              pricePerKg: 80,
-              image: ".\\img\\Oriental-Sweets-Section\\5K7A6193 copy.jpg",
-            },
-            {
-              name: "بقلاوة عين جمل",
-              pricePerKg: 55,
-              image: ".\\img\\Oriental-Sweets-Section\\5O1A6634 copy.jpg",
-            },
-            {
-              name: "نابلسية",
-              pricePerKg: 50,
-              image:
-                "https://images.unsplash.com/photo-1550617931-e17a7b70dce2?w=800&q=80",
-            },
-            {
-              name: "بقلاوة لوز",
-              pricePerKg: 48,
-              image:
-                "https://images.unsplash.com/photo-1592415499556-430747e5bf47?w=800&q=80",
-            },
-            {
-              name: "أساور لوز",
-              pricePerKg: 48,
-              image:
-                "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&q=80",
-            },
-            {
-              name: "كنافة عربية",
-              pricePerKg: 40,
-              image:
-                "https://images.unsplash.com/photo-1623428187969-5da2dcea5ebf?w=800&q=80",
-            },
-            {
-              name: "بسبوسة نوتيلا",
-              pricePerKg: 40,
-              image: ".\\img\\Oriental-Sweets-Section\\5K7A6205 copy.jpg",
+              name: "كلاج",
+              pricePerKg: 30,
+              image: "./img/Oriental-Sweets-Section/5O1A6669 copy.jpg",
+              active: false,
             },
             {
               name: "عش البلبل",
@@ -1443,27 +1510,79 @@
                 "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=800&q=80",
             },
             {
-              name: "إسطنبولية",
+              name: "اسطنبولية",
               pricePerKg: 35,
               image:
                 "https://images.unsplash.com/photo-1608198399988-841b00f31d2b?w=800&q=80",
             },
             {
-              name: "كلاج",
-              pricePerKg: 30,
-              image: ".\\img\\Oriental-Sweets-Section\\5O1A6669 copy.jpg",
-              active: false,
-            },
-            {
-              name: "نمورة",
-              pricePerKg: 25,
-              image: ".\\img\\Oriental-Sweets-Section\\5K7A6219 copy.jpg",
-            },
-            {
-              name: "بسبوسة بالقشطة",
-              pricePerKg: 25,
+              name: "كنافة عربية",
+              pricePerKg: 40,
               image:
-                "https://images.unsplash.com/photo-1602351447937-745cb720612f?w=800&q=80",
+                "https://images.unsplash.com/photo-1623428187969-5da2dcea5ebf?w=800&q=80",
+            },
+            {
+              name: "بسبوسة نوتيلا",
+              pricePerKg: 40,
+              image: "./img/Oriental-Sweets-Section/5K7A6205 copy.jpg",
+            },
+            {
+              name: "بقلاوة لوز",
+              pricePerKg: 48,
+              image:
+                "https://images.unsplash.com/photo-1592415499556-430747e5bf47?w=800&q=80",
+            },
+            {
+              name: "أساور لوز",
+              pricePerKg: 48,
+              image:
+                "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&q=80",
+            },
+            {
+              name: "أساور كاجو",
+              pricePerKg: 48,
+              image:
+                "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&q=80",
+            },
+            {
+              name: "نابلسية",
+              pricePerKg: 50,
+              image:
+                "https://images.unsplash.com/photo-1550617931-e17a7b70dce2?w=800&q=80",
+            },
+            {
+              name: "بقلاوة عين جمل",
+              pricePerKg: 55,
+              image: "./img/Oriental-Sweets-Section/5O1A6634 copy.jpg",
+            },
+            {
+              name: "كاسات مكسرات",
+              pricePerKg: 80,
+              image: "./img/Oriental-Sweets-Section/5K7A6193 copy.jpg",
+            },
+            {
+              name: "بورما حلبي",
+              pricePerKg: 100,
+              image:
+                "https://images.unsplash.com/photo-1599599810769-bcde5a160d32?w=800&q=80",
+              delivery: false,
+            },
+            {
+              name: "بقلاوة حلبي",
+              pricePerKg: 100,
+              image:
+                "https://images.unsplash.com/photo-1519676867240-f03562e64548?w=800&q=80",
+            },
+            {
+              name: "بلورية حلبي",
+              pricePerKg: 130,
+              image:
+                "https://images.unsplash.com/photo-1571167530149-c6f274f6db8f?w=800&q=80",
+            },
+            {
+              name: "دولمة حلبي",
+              pricePerKg: 130,
+              image: "./img/Oriental-Sweets-Section/5K7A6213 copy.jpg",
             },
           ],
         },
@@ -1483,12 +1602,6 @@
                 "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800&q=80",
             },
             {
-              name: "قالب نص بلاطة",
-              price: 150,
-              image:
-                "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=800&q=80",
-            },
-            {
               name: "قطع كيك كلاسيك",
               price: 8,
               image:
@@ -1497,7 +1610,7 @@
             {
               name: "سويس رول",
               price: 8,
-              image: ".\\img\\Cake-section\\5O1A6200 copy.jpg",
+              image: "./img/Cake-section/5O1A6200 copy.jpg",
             },
             {
               name: "تريلتشا",
@@ -1505,6 +1618,42 @@
               image:
                 "https://images.unsplash.com/photo-1621303837293-d3bb11f4e4f4?w=800&q=80",
             },
+            {
+              name: "بان كيك ",
+              price: 30,
+              desc: "  نوتيلا / بيستاشيو / لوتس",
+              image:
+                "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800&q=80",
+            },
+            {
+              name: "قطع كيك سبيشل",
+              price: 15,
+              desc: "  نوتيلا / بيستاشيو / لوتس",
+              image:
+                "https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=800&q=80",
+            },
+            {
+              name: "سوبريم",
+              price: 20,
+              desc: " لوتس - نوتيلا - بيستاشيو",
+              image: "./img/Cake-section/5O1A6266 copy.jpg",
+            },
+            {
+              name: "كرانش بار",
+              price: 15,
+              image: "./img/Cake-section/5O1A6302 copy.jpg",
+            },
+            {
+              name: "قالب نص بلاطة",
+              price: 150,
+              image:
+                "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=800&q=80",
+            },
+          ],
+        },
+        BarSweets: {
+          title: "🍩 حلويات البار",
+          items: [
             {
               name: "كريب شوكولاتة",
               price: 15,
@@ -1514,7 +1663,13 @@
             {
               name: "كريب (نوتيلا / بيستاشيو / لوتس)",
               price: 30,
-              image: ".\\img\\Bar-section\\5O1A6815 copy.jpg",
+              image: "./img/Bar-section/55.jpeg",
+            },
+            {
+              name: "كريب دبي",
+              price: 30,
+              image:
+                "https://images.unsplash.com/photo-1519676867240-f03562e64548?w=800&q=80",
             },
             {
               name: "رينجز",
@@ -1525,12 +1680,12 @@
             {
               name: "لقيمات شوكولاتة",
               price: 15,
-              image: ".\\img\\Cake-section\\5O1A6772 copy.jpg",
+              image: "./img/Bar-section/5O1A6772 copy.jpg",
             },
             {
               name: "لقيمات (نوتيلا / بيستاشيو / لوتس)",
               price: 30,
-              image: ".\\img\\Cake-section\\5O1A6767 copy.jpg",
+              image: "./img/Bar-section/5O1A6767 copy.jpg",
             },
             {
               name: "بان كيك شوكولاتة",
@@ -1539,164 +1694,43 @@
                 "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800&q=80",
             },
             {
-              name: "بان كيك (نوتيلا / بيستاشيو / لوتس)",
-              price: 30,
-              image: ".\\img\\Cake-section\\5O1A6200 copy.jpg",
+              name: "مولتن كيك",
+              price: 25,
+              image:
+                "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&q=80",
             },
             {
-              name: "سوبريم",
-              price: 20,
-              image: ".\\img\\Cake-section\\5O1A6266 copy.jpg",
+              name: "هوت كيك",
+              price: 25,
+              image:
+                "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800&q=80",
             },
             {
-              name: "كرانش بار",
+              name: "براونيز",
+              price: 25,
+              image: "./img/Bar-section/5O1A6855 copy.jpg",
+            },
+            {
+              name: "كنافة نويتلا",
               price: 15,
-              image: ".\\img\\Cake-section\\5O1A6302 copy.jpg",
-            },
-          ],
-        },
-        sandwiches: {
-          title: "🍔 السندويشات الغربية",
-          items: [
-            {
-              name: "تشكن بيتزا",
-              price: 25,
-              desc: "مشروم، فليفلة، كريمة، دجاج طازج، وبصل",
-              image: ".\\img\\Western-Food-Section\\5O1A7343 copy.jpg",
-            },
-            {
-              name: "شيش طاووق",
-              price: 25,
-              desc: "فخذ دجاج متبّل مع فليفلة ملوّنة وبصل",
-              image: ".\\img\\Western-Food-Section\\5O1A7381 copy.jpg",
-            },
-            {
-              name: "برجر",
-              price: 25,
-              image: ".\\img\\Western-Food-Section\\5O1A7361 copy.jpg",
-            },
-            {
-              name: "زينجر",
-              price: 25,
-              desc: "شرائح صدر دجاج متبّلة مع بندورة طازجة، جرجير، حلقات بصل",
-              image: ".\\img\\Western-Food-Section\\5O1A7321 copy.jpg",
-            },
-            {
-              name: "فطيرة الذهبية",
-              price: 25,
-              desc: "صوص خاص",
-              image: ".\\img\\Western-Food-Section\\5O1A7260 copy.jpg",
-            },
-            {
-              name: "بيغ ماك",
-              price: 35,
               image:
-                "https://images.unsplash.com/photo-1550547660-d9450f859349?w=800&q=80",
-            },
-            {
-              name: "شيبس كبير",
-              price: 10,
-              image:
-                "https://images.unsplash.com/photo-1598679253544-2c97992403ea?w=800&q=80",
-            },
-            {
-              name: "شيبس صغير",
-              price: 5,
-              image:
-                "https://images.unsplash.com/photo-1639024471283-03518883512d?w=800&q=80",
-            },
-          ],
-        },
-        italian: {
-          title: "🍕 الإيطالي",
-          items: [
-            {
-              name: "كاليزوني دجاج",
-              price: 25,
-              image: ".\\img\\Italian-section\\5K7A6147 copy.jpg",
-            },
-            {
-              name: "كاليزوني خضار",
-              price: 15,
-              image: ".\\img\\Italian-section\\5O1A6437 copy.jpg",
-            },
-            {
-              name: "ميجا",
-              price: 30,
-              desc: "خبزة الكالزوني...",
-              image: "..\\img\\Italian-section\\5O1A6511 copy.jpg",
-            },
-            {
-              name: "بيتزا مكسيكي دجاج",
-              price: 25,
-              desc: "بيتزا خضار مع صدر الدجاج وجبنه",
-              image: ".\\img\\Italian-section\\5O1A6414 copy.jpg",
-            },
-            {
-              name: "بيتزا خضار",
-              price: 20,
-              image: "..\\img\\Italian-section\\5O1A6373 copy.jpg",
-            },
-            {
-              name: "بيتزا ذرة",
-              price: 20,
-              image:
-                "https://images.unsplash.com/photo-1628840042765-356cda07504e?w=800&q=80",
-            },
-            {
-              name: "بيتزا أناناس",
-              price: 20,
-              image:
-                "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=800&q=80",
-            },
-            {
-              name: "مارجريتا",
-              price: 20,
-              image:
-                "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=800&q=80",
-            },
-            {
-              name: "نابولي",
-              price: 20,
-              desc: "بيتزا بالتونة والزيتون",
-              image:
-                "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800&q=80",
-            },
-            {
-              name: "صوص إضافي",
-              price: 3,
-              image:
-                "https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=800&q=80",
+                "https://images.unsplash.com/photo-1519676867240-f03562e64548?w=800&q=80",
             },
           ],
         },
         drinks: {
           title: "🥤 المشروبات",
           items: [
-            {
-              name: "عصير الموسم",
-              price: 12,
-              image: ".\\img\\Bar-section\\5O1A7225 copy.jpg",
-            },
-            {
-              name: "ليمون ونعنع",
-              price: 12,
-              image: ".\\img\\Bar-section\\5O1A7225 copy.jpg",
-            },
-            {
-              name: "أفوكادو",
-              price: 18,
-              image: ".\\img\\Bar-section\\5O1A7238 copy.jpg",
-            },
-            {
-              name: "آيس موكا",
-              price: 12,
-              image:
-                "https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?w=800&q=80",
-            },
+            { name: "عصير الموسم", price: 12, image: "./img/drinks/2.jpg" },
+            { name: "عصير أناناس", price: 12, image: "./img/drinks/1.jpg" },
+            { name: "ليمون ونعنع", price: 12, image: "./img/drinks/3.jpg" },
+            { name: "موهيتو", price: 30, image: "./img/drinks/4.jpg" },
+            { name: "أفوكادو", price: 18, image: "./img/drinks/5.jpg" },
+            { name: "شوكو بارد", price: 12, image: "./img/drinks/6.jpg" },
             {
               name: "آيس كافي",
               price: 12,
+              desc: "رشة نس كافيه",
               image:
                 "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=800&q=80",
             },
@@ -1717,6 +1751,7 @@
               price: 10,
               image:
                 "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=800&q=80",
+              active: false,
             },
             {
               name: "إسبريسو سنجل",
@@ -1741,30 +1776,6 @@
               price: 10,
               image:
                 "https://images.unsplash.com/photo-1527960669775-676a7ff00b58?w=800&q=80",
-            },
-            {
-              name: "موهيتو",
-              price: 30,
-              image:
-                "https://images.unsplash.com/photo-1551538827-9c037cb4f32a?w=800&q=80",
-            },
-            {
-              name: "مولتن كيك",
-              price: 25,
-              image:
-                "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&q=80",
-            },
-            {
-              name: "براونيز",
-              price: 25,
-              image:
-                "https://images.unsplash.com/photo-1607920591413-4ec007e70023?w=800&q=80",
-            },
-            {
-              name: "كريب دبي",
-              price: 30,
-              image:
-                "https://images.unsplash.com/photo-1519676867240-f03562e64548?w=800&q=80",
             },
           ],
         },
@@ -1864,18 +1875,15 @@
           const province = this.value;
           currentProvince = province;
 
-          // Clear location select
           locationSelect.innerHTML =
             '<option value="">-- اختر المنطقة --</option>';
           deliveryPriceDisplay.style.display = "none";
           selectedLocation = null;
 
           if (province) {
-            // Show location group and enable select
             locationGroup.style.display = "block";
             locationSelect.disabled = false;
 
-            // Populate locations based on province
             const locations = CONFIG.deliveryLocations[province] || [];
             locations.forEach((loc) => {
               const option = document.createElement("option");
@@ -1914,7 +1922,7 @@
         if (currentProvince && CONFIG.whatsappNumbers[currentProvince]) {
           return CONFIG.whatsappNumbers[currentProvince];
         }
-        return CONFIG.whatsappNumbers.gaza; // Default
+        return CONFIG.whatsappNumbers.gaza;
       }
 
       function showSection(id) {
@@ -2328,7 +2336,7 @@
       function showToast(msg) {
         const t = document.createElement("div");
         t.style =
-          "position:fixed; top:20px; left:50%; transform:translateX(-50%); background:var(--brand-color); color:white; padding:12px 24px; border-radius:10px; z-index:3000; box-shadow: 0 5px 15px rgba(0,0,0,0.3); font-weight:bold;";
+          "position:fixed; top:20px; left:50%; transform:translateX(-50%); background:var(--brand-color); color:white; padding:12px 24px; border-radius:10px; z-index:3000; box-shadow: 0 5px 15px rgba(0,0,0,0.3); font-weight:bold; max-width:90vw; text-align:center;";
         t.textContent = msg;
         document.body.appendChild(t);
         setTimeout(() => t.remove(), 3000);
