@@ -29,9 +29,11 @@
         -webkit-tap-highlight-color: transparent;
       }
 
-      html {
-        overflow-x: hidden;
+      html,
+      body {
         width: 100%;
+        height: 100%;
+        overflow-x: hidden;
       }
 
       body {
@@ -39,10 +41,7 @@
         background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1a1a 100%);
         color: var(--text-primary);
         line-height: 1.6;
-        overflow-x: hidden;
         min-height: 100vh;
-        width: 100%;
-        max-width: 100vw;
       }
 
       header {
@@ -53,161 +52,252 @@
         top: 0;
         z-index: 1000;
         border-bottom: 1px solid rgba(226, 0, 4, 0.2);
-        width: 100%;
       }
 
       .header-content {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
         max-width: 1400px;
         margin: 0 auto;
         padding: 0 clamp(10px, 3vw, 15px);
-        width: 100%;
       }
 
       .logo {
         font-size: 1.5rem;
         font-weight: 600;
         color: var(--text-primary);
-        flex: 1;
         text-align: center;
       }
+
       .logo-red {
         color: var(--brand-color);
         font-size: clamp(1.8rem, 4vw, 2.5rem);
         font-weight: 800;
       }
+
       .logo-red sub {
         font-size: 1.2rem;
         font-weight: 800;
       }
 
-      .burger-menu {
-        display: flex;
-        align-items: center;
-        gap: clamp(4px, 2vw, 8px);
-        cursor: pointer;
-        z-index: 1001;
-        padding: clamp(6px, 2vw, 8px) clamp(8px, 2.5vw, 12px);
-        border-radius: 8px;
-        transition: var(--transition);
-      }
-
-      .burger-menu:hover {
-        background: rgba(226, 0, 4, 0.1);
-      }
-
-      .burger-icon {
-        width: clamp(20px, 5vw, 24px);
-        height: clamp(15px, 4vw, 18px);
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-      }
-
-      .burger-line {
-        width: 100%;
-        height: 3px;
-        background: var(--brand-color);
-        border-radius: 3px;
-        transition: var(--transition);
-      }
-
-      .burger-text {
-        color: var(--brand-color);
-        font-weight: 600;
-        font-size: clamp(0.75rem, 2.5vw, 0.9rem);
-      }
-
-      .burger-menu.active .burger-line:nth-child(1) {
-        transform: translateY(7.5px) rotate(45deg);
-      }
-      .burger-menu.active .burger-line:nth-child(2) {
-        opacity: 0;
-      }
-      .burger-menu.active .burger-line:nth-child(3) {
-        transform: translateY(-7.5px) rotate(-45deg);
-      }
-
-      .nav-sidebar {
+      .back-btn {
         position: fixed;
-        right: -100%;
-        top: 0;
-        width: min(280px, 85vw);
-        height: 100vh;
-        background: var(--card-bg);
-        z-index: 1000;
-        transition: var(--transition);
-        padding: clamp(70px, 15vh, 80px) 15px 20px;
-        box-shadow: -5px 0 30px rgba(0, 0, 0, 0.5);
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-      }
-      .nav-sidebar.active {
-        right: 0;
-      }
-      .nav-overlay {
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.7);
-        z-index: 999;
-        display: none;
-      }
-      .nav-overlay.active {
-        display: block;
-      }
-      .nav-btn {
-        width: 100%;
-        background: transparent;
-        color: var(--text-secondary);
-        border: 1px solid var(--brand-color);
-        padding: clamp(8px, 2.5vw, 10px);
-        border-radius: 10px;
-        cursor: pointer;
-        margin-bottom: 8px;
-        font-family: inherit;
-        font-weight: 600;
-        text-align: right;
-        font-size: clamp(0.85rem, 2.5vw, 0.95rem);
-        transition: var(--transition);
-      }
-      .nav-btn.active {
+        top: 80px;
+        right: 20px;
         background: var(--brand-color);
         color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 25px;
+        font-family: inherit;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        z-index: 100;
+        display: none;
+        transition: var(--transition);
+        box-shadow: 0 4px 15px var(--shadow);
       }
 
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: clamp(5px, 2vw, 10px) clamp(10px, 3vw, 15px)
-          clamp(30px, 8vh, 50px);
-        width: 100%;
-        overflow-x: hidden;
+      .back-btn:hover {
+        transform: scale(1.05);
       }
-      .menu-section {
+
+      .back-btn.visible {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      /* Categories Carousel Section */
+      .categories-section {
+        min-height: calc(100vh - 70px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .categories-section.hidden {
         display: none;
       }
-      .menu-section.active {
+
+      .orbit-container {
+        position: relative;
+        width: min(550px, 95vw);
+        height: min(550px, 95vw);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .center-circle {
+        width: clamp(90px, 22vw, 130px);
+        height: clamp(90px, 22vw, 130px);
+        background: linear-gradient(145deg, var(--brand-color), #a00003);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        box-shadow:
+          0 0 60px var(--shadow),
+          inset 0 0 30px rgba(0, 0, 0, 0.3);
+        z-index: 10;
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      .center-circle h2 {
+        font-size: clamp(0.9rem, 3.5vw, 1.3rem);
+        font-weight: 800;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        text-align: center;
+      }
+
+      .center-circle span {
+        font-size: clamp(1.3rem, 5vw, 2rem);
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+
+      .orbit-ring {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: 2px dashed rgba(226, 0, 4, 0.3);
+        border-radius: 50%;
+        animation: rotate 60s linear infinite;
+      }
+
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .categories-orbit {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        animation: orbit 40s linear infinite;
+      }
+
+      .categories-orbit.paused {
+        animation-play-state: paused;
+      }
+
+      @keyframes orbit {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .category-item {
+        position: absolute;
+        width: clamp(75px, 19vw, 110px);
+        height: clamp(75px, 19vw, 110px);
+        background: linear-gradient(145deg, var(--card-bg), #252525);
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        cursor: pointer;
+        transition: var(--transition);
+        border: 3px solid transparent;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        text-align: center;
+        overflow: hidden;
+        padding: 0;
+      }
+
+      .category-item:hover {
+        border-color: var(--brand-color);
+        transform: scale(1.2) !important;
+        box-shadow: 0 10px 40px var(--shadow);
+      }
+
+      .category-item img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        top: 0;
+        left: 0;
+        transition: var(--transition);
+      }
+
+      .category-item:hover img {
+        transform: scale(1.1);
+      }
+
+      .category-item .category-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+        padding: 8px 5px 6px;
+        z-index: 2;
+      }
+
+      .category-item p {
+        font-size: clamp(0.55rem, 2.2vw, 0.75rem);
+        font-weight: 700;
+        line-height: 1.2;
+        color: var(--text-primary);
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+      }
+
+      /* Products Section */
+      .products-section {
+        display: none;
+        padding: 20px;
+        padding-top: 80px;
+        min-height: calc(100vh - 70px);
+      }
+
+      .products-section.visible {
         display: block;
         animation: fadeIn 0.5s ease;
       }
+
       .section-title {
         text-align: center;
-        margin: clamp(15px, 4vw, 20px) 0 clamp(20px, 5vw, 25px);
+        margin: 20px 0 30px;
       }
+
       .section-title h2 {
-        font-size: clamp(1.2rem, 4.5vw, 1.8rem);
+        font-size: clamp(1.4rem, 5vw, 2rem);
         border-bottom: 3px solid var(--brand-color);
         display: inline-block;
-        padding-bottom: 5px;
+        padding-bottom: 8px;
       }
 
       .product-grid {
         display: grid;
         gap: clamp(10px, 2.5vw, 15px);
         grid-template-columns: repeat(2, 1fr);
-        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
       }
 
       @media (min-width: 500px) {
@@ -215,54 +305,37 @@
           grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
         }
       }
-
       @media (min-width: 768px) {
         .product-grid {
           grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
         }
       }
-
       @media (min-width: 1024px) {
         .product-grid {
           grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         }
       }
 
-      @media (min-width: 1280px) {
-        .product-grid {
-          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        }
-      }
-
       .product-card {
         background: var(--card-bg);
-        border-radius: clamp(10px, 2.5vw, 12px);
+        border-radius: 12px;
         overflow: hidden;
         aspect-ratio: 3/4;
         position: relative;
         cursor: pointer;
         opacity: 0;
-        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        width: 100%;
+        transform: translateY(30px);
+        transition: all 0.5s ease;
       }
 
-      .reveal-right {
-        transform: translateX(60px);
-      }
-      .reveal-left {
-        transform: translateX(-60px);
-      }
-      .product-card.active {
-        opacity: 1 !important;
-        transform: translateX(0) !important;
+      .product-card.visible {
+        opacity: 1;
+        transform: translateY(0);
       }
 
       .product-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 10px 30px var(--shadow);
-      }
-      .product-card:active {
-        transform: scale(0.98);
       }
 
       .product-card img {
@@ -271,30 +344,35 @@
         object-fit: cover;
         transition: 0.5s;
       }
+
       .product-card:hover img {
         transform: scale(1.08);
       }
+
       .card-overlay {
         position: absolute;
         bottom: 0;
         inset: 0;
         padding: clamp(10px, 2.5vw, 12px);
-        background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+        background: linear-gradient(transparent 40%, rgba(0, 0, 0, 0.9));
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
       }
+
       .card-overlay h3 {
         font-size: clamp(0.85rem, 2.8vw, 1.1rem);
         margin-bottom: 5px;
         line-height: 1.3;
       }
+
       .product-price {
         color: var(--brand-color);
         font-weight: 800;
         font-size: clamp(1rem, 3.2vw, 1.4rem);
       }
 
+      /* Modal */
       .modal {
         position: fixed;
         inset: 0;
@@ -303,32 +381,32 @@
         display: none;
         align-items: center;
         justify-content: center;
-        padding: clamp(10px, 3vw, 15px);
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
+        padding: 15px;
       }
+
       .modal.active {
         display: flex;
       }
+
       .modal-content {
         background: var(--card-bg);
-        border-radius: clamp(15px, 4vw, 20px);
+        border-radius: 20px;
         width: 100%;
         max-width: min(500px, 95vw);
         overflow: hidden;
         animation: scaleUp 0.3s ease;
         max-height: 90vh;
         overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-        margin: auto;
       }
+
       .modal-image {
         width: 100%;
         height: clamp(200px, 35vw, 300px);
         object-fit: cover;
       }
+
       .modal-body {
-        padding: clamp(15px, 4vw, 20px);
+        padding: 20px;
         text-align: center;
       }
 
@@ -357,7 +435,6 @@
         color: var(--text-secondary);
         margin: 10px 0;
         font-size: clamp(0.85rem, 2.5vw, 1rem);
-        line-height: 1.6;
       }
 
       .modal-price {
@@ -365,30 +442,6 @@
         color: var(--brand-color);
         font-weight: 800;
         margin: 15px 0;
-      }
-
-      @media (max-width: 360px) {
-        .burger-text {
-          display: none;
-        }
-      }
-
-      @media (max-width: 480px) {
-        .burger-text {
-          display: none;
-        }
-      }
-
-      @media (min-width: 1024px) {
-        .burger-text {
-          display: inline;
-        }
-      }
-
-      @media (min-width: 1440px) {
-        .container {
-          max-width: 1400px;
-        }
       }
 
       @keyframes fadeIn {
@@ -399,6 +452,7 @@
           opacity: 1;
         }
       }
+
       @keyframes scaleUp {
         from {
           transform: scale(0.9);
@@ -411,7 +465,7 @@
       }
 
       ::-webkit-scrollbar {
-        width: clamp(6px, 1.5vw, 8px);
+        width: 8px;
       }
       ::-webkit-scrollbar-track {
         background: var(--dark-bg);
@@ -421,9 +475,40 @@
         border-radius: 4px;
       }
 
-      @media (hover: none) {
-        .product-card:active {
-          transform: scale(0.98);
+      /* Floating particles */
+      .particle {
+        position: fixed;
+        width: 4px;
+        height: 4px;
+        background: var(--brand-color);
+        border-radius: 50%;
+        pointer-events: none;
+        opacity: 0.3;
+        animation: float 10s infinite ease-in-out;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0) translateX(0);
+        }
+        25% {
+          transform: translateY(-20px) translateX(10px);
+        }
+        50% {
+          transform: translateY(-10px) translateX(-10px);
+        }
+        75% {
+          transform: translateY(-30px) translateX(5px);
+        }
+      }
+
+      @keyframes counterRotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(-360deg);
         }
       }
     </style>
@@ -431,27 +516,34 @@
   <body>
     <header>
       <div class="header-content">
-        <div class="burger-menu" id="burgerMenu">
-          <div class="burger-icon">
-            <div class="burger-line"></div>
-            <div class="burger-line"></div>
-            <div class="burger-line"></div>
-          </div>
-          <span class="burger-text">الاقسام</span>
-        </div>
         <div class="logo">
           <span class="logo-red">O<sub>2</sub></span> Restaurant
         </div>
-        <div style="width: 30px"></div>
       </div>
     </header>
 
-    <div class="nav-overlay" id="navOverlay"></div>
-    <nav class="nav-sidebar" id="navSidebar"><div id="navButtons"></div></nav>
+    <button class="back-btn" id="backBtn" onclick="showCategories()">
+      <span>→</span> العودة للأقسام
+    </button>
 
-    <div class="container" id="menuContainer"></div>
+    <section class="categories-section" id="categoriesSection">
+      <div class="orbit-container">
+        <div class="orbit-ring"></div>
+        <div class="categories-orbit" id="orbit"></div>
+        <div class="center-circle">
+          <span>🍽️</span>
+          <h2>الأقسام</h2>
+        </div>
+      </div>
+    </section>
 
-    <!-- Product Details Modal -->
+    <section class="products-section" id="productsSection">
+      <div class="section-title">
+        <h2 id="sectionTitle"></h2>
+      </div>
+      <div class="product-grid" id="productGrid"></div>
+    </section>
+
     <div class="modal" id="productModal">
       <div class="modal-content">
         <img id="modalImage" class="modal-image" src="" alt="" />
@@ -467,7 +559,8 @@
     <script>
       const menuData = {
         shawarma: {
-          title: "🌯 الشاورما",
+          title: "الشاورما",
+          categoryImage: "./img/categories/shawarma.jpg",
           items: [
             {
               name: "بيتا شاورما",
@@ -532,7 +625,8 @@
           ],
         },
         italian: {
-          title: "🍕 الإيطالي",
+          title: "الإيطالي",
+          categoryImage: "./img/categories/italian.jpg",
           items: [
             {
               name: "كاليزوني دجاج",
@@ -590,7 +684,8 @@
           ],
         },
         sandwiches: {
-          title: "🍔 السندويشات الغربية",
+          title: "السندويشات الغربية",
+          categoryImage: "./img/categories/sandwiches.jpg",
           items: [
             {
               name: "زينجر",
@@ -631,7 +726,8 @@
           ],
         },
         easternSweets: {
-          title: "🍯 الحلويات الشرقية",
+          title: "الحلويات الشرقية",
+          categoryImage: "./img/categories/eastern-sweets.jpg",
           byWeight: true,
           items: [
             {
@@ -727,7 +823,8 @@
           ],
         },
         westernSweets: {
-          title: "🍰 الكيك والحلويات الغربية",
+          title: "الكيك والحلويات الغربية",
+          categoryImage: "./img/categories/38.jpg",
           items: [
             {
               name: "قالب كيك صغير",
@@ -778,7 +875,8 @@
           ],
         },
         BarSweets: {
-          title: "🍩 حلويات البار",
+          title: "حلويات البار",
+          categoryImage: "./img/categories/bar-sweets.jpg",
           items: [
             {
               name: "كريب شوكولاتة",
@@ -819,7 +917,8 @@
           ],
         },
         drinks: {
-          title: "🥤 المشروبات",
+          title: "المشروبات",
+          categoryImage: "./img/categories/18.jpg",
           items: [
             { name: "عصير الموسم", price: 12, image: "./img/drinks/1.jpg" },
             { name: "عصير أناناس", price: 12, image: "./img/drinks/2.jpg" },
@@ -850,7 +949,8 @@
           ],
         },
         salads: {
-          title: "🥗 السلطات",
+          title: "السلطات",
+          categoryImage: "./img/categories/5.jpeg",
           items: [
             { name: "صوص بيكانتي", price: 5, image: "./img/salad/1.jpeg" },
             { name: "صوص ثومية", price: 5, image: "./img/salad/2.jpeg" },
@@ -872,73 +972,107 @@
         },
       };
 
+      let currentCategory = null;
+
       function init() {
-        const navBtns = document.getElementById("navButtons");
-        const container = document.getElementById("menuContainer");
+        createOrbit();
+        createParticles();
+      }
 
-        Object.keys(menuData).forEach((key, idx) => {
-          const btn = document.createElement("button");
-          btn.className = `nav-btn ${idx === 0 ? "active" : ""}`;
-          btn.textContent = menuData[key].title;
-          btn.onclick = () => showSection(key);
-          navBtns.appendChild(btn);
+      function createOrbit() {
+        const orbit = document.getElementById("orbit");
+        const categories = Object.keys(menuData);
+        const total = categories.length;
+        const radius = Math.min(window.innerWidth * 0.38, 210);
 
-          const s = document.createElement("section");
-          s.id = key;
-          s.className = `menu-section ${idx === 0 ? "active" : ""}`;
-          s.innerHTML = `<div class="section-title"><h2>${menuData[key].title}</h2></div>`;
+        categories.forEach((key, index) => {
+          const angle = (index / total) * 2 * Math.PI - Math.PI / 2;
+          const x = Math.cos(angle) * radius;
+          const y = Math.sin(angle) * radius;
 
-          const grid = document.createElement("div");
-          grid.className = "product-grid";
+          const itemSize = Math.min(window.innerWidth * 0.095, 55);
 
-          menuData[key].items.forEach((item, index) => {
-            if (item.active === false) return;
+          const item = document.createElement("div");
+          item.className = "category-item";
+          item.style.left = `calc(50% + ${x}px - ${itemSize}px)`;
+          item.style.top = `calc(50% + ${y}px - ${itemSize}px)`;
+          item.style.animation = `counterRotate 40s linear infinite`;
 
-            const card = document.createElement("div");
-            const sideClass = index % 2 === 0 ? "reveal-right" : "reveal-left";
-            card.className = `product-card ${sideClass}`;
+          const categoryData = menuData[key];
 
-            const displayPrice = item.pricePerKg
-              ? `${item.pricePerKg} ₪/كغ`
-              : `${item.price} ₪`;
+          item.innerHTML = `
+            <img src="${categoryData.categoryImage}" alt="${categoryData.title}" onerror="this.style.display='none'">
+            <div class="category-overlay">
+              <p>${categoryData.title}</p>
+            </div>
+          `;
+          item.onclick = () => showProducts(key);
 
-            card.innerHTML = `
-              <img src="${item.image}" onerror="this.src='https://via.placeholder.com/400x600?text=صورة+غير+متوفرة'">
-              <div class="card-overlay">
-                <h3>${item.name}</h3>
-                <div class="product-price">${displayPrice}</div>
-              </div>
-            `;
-            card.onclick = () => openModal(item, menuData[key].byWeight);
-            grid.appendChild(card);
-          });
+          orbit.appendChild(item);
+        });
+      }
 
-          s.appendChild(grid);
-          container.appendChild(s);
+      function createParticles() {
+        for (let i = 0; i < 15; i++) {
+          const particle = document.createElement("div");
+          particle.className = "particle";
+          particle.style.left = Math.random() * 100 + "%";
+          particle.style.top = Math.random() * 100 + "%";
+          particle.style.animationDelay = Math.random() * 5 + "s";
+          particle.style.animationDuration = 8 + Math.random() * 4 + "s";
+          document.body.appendChild(particle);
+        }
+      }
+
+      function showProducts(categoryKey) {
+        currentCategory = categoryKey;
+        const category = menuData[categoryKey];
+
+        document.getElementById("categoriesSection").classList.add("hidden");
+        document.getElementById("productsSection").classList.add("visible");
+        document.getElementById("backBtn").classList.add("visible");
+        document.getElementById("sectionTitle").textContent = category.title;
+
+        const grid = document.getElementById("productGrid");
+        grid.innerHTML = "";
+
+        category.items.forEach((item, index) => {
+          const card = document.createElement("div");
+          card.className = "product-card";
+
+          const displayPrice = item.pricePerKg
+            ? `${item.pricePerKg} ₪/كغ`
+            : `${item.price} ₪`;
+          const placeholder = `https://via.placeholder.com/400x500/1a1a1a/e20004?text=${encodeURIComponent(item.name)}`;
+
+          card.innerHTML = `
+            <img src="${item.image || placeholder}" onerror="this.src='${placeholder}'">
+            <div class="card-overlay">
+              <h3>${item.name}</h3>
+              <div class="product-price">${displayPrice}</div>
+            </div>
+          `;
+          card.onclick = () => openModal(item, category.byWeight);
+          grid.appendChild(card);
+
+          setTimeout(() => card.classList.add("visible"), index * 50);
         });
 
-        setTimeout(revealProducts, 100);
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }
 
-      function showSection(id) {
-        document
-          .querySelectorAll(".menu-section, .nav-btn")
-          .forEach((el) => el.classList.remove("active"));
-        document.getElementById(id).classList.add("active");
-        if (event && event.target) event.target.classList.add("active");
-        toggleNav();
-      }
-
-      function toggleNav() {
-        document.getElementById("navSidebar").classList.toggle("active");
-        document.getElementById("navOverlay").classList.toggle("active");
-        document.getElementById("burgerMenu").classList.toggle("active");
+      function showCategories() {
+        document.getElementById("categoriesSection").classList.remove("hidden");
+        document.getElementById("productsSection").classList.remove("visible");
+        document.getElementById("backBtn").classList.remove("visible");
+        currentCategory = null;
       }
 
       function openModal(item, isByWeight) {
         document.getElementById("modalTitle").textContent = item.name;
         document.getElementById("modalDesc").textContent = item.desc || "";
-        document.getElementById("modalImage").src = item.image;
+        const placeholder = `https://via.placeholder.com/500x300/1a1a1a/e20004?text=${encodeURIComponent(item.name)}`;
+        document.getElementById("modalImage").src = item.image || placeholder;
 
         const displayPrice = isByWeight
           ? `${item.pricePerKg} ₪/كغ`
@@ -952,27 +1086,17 @@
         document.getElementById("productModal").classList.remove("active");
       }
 
-      function revealProducts() {
-        const observer = new IntersectionObserver(
-          (entries) =>
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) entry.target.classList.add("active");
-            }),
-          { threshold: 0.1 },
-        );
-        document
-          .querySelectorAll(".product-card")
-          .forEach((card) => observer.observe(card));
-      }
-
-      // Event Listeners
-      document.getElementById("burgerMenu").onclick = toggleNav;
-      document.getElementById("navOverlay").onclick = toggleNav;
-
-      // Close modal when clicking outside
       document.getElementById("productModal").onclick = function (e) {
         if (e.target === this) closeModal();
       };
+
+      // Pause orbit on hover
+      document.getElementById("orbit").addEventListener("mouseenter", () => {
+        document.getElementById("orbit").classList.add("paused");
+      });
+      document.getElementById("orbit").addEventListener("mouseleave", () => {
+        document.getElementById("orbit").classList.remove("paused");
+      });
 
       init();
     </script>
