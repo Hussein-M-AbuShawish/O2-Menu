@@ -11,10 +11,6 @@
       href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
     <style>
       :root {
         --brand-color: #e20004;
@@ -33,7 +29,6 @@
         -webkit-tap-highlight-color: transparent;
       }
 
-      /* === إضافات لمنع الإزاحة الأفقية === */
       html {
         overflow-x: hidden;
         width: 100%;
@@ -46,7 +41,6 @@
         line-height: 1.6;
         overflow-x: hidden;
         min-height: 100vh;
-        touch-action: pan-y;
         width: 100%;
         max-width: 100vw;
       }
@@ -98,7 +92,6 @@
         padding: clamp(6px, 2vw, 8px) clamp(8px, 2.5vw, 12px);
         border-radius: 8px;
         transition: var(--transition);
-        touch-action: manipulation;
       }
 
       .burger-menu:hover {
@@ -160,7 +153,6 @@
         background: rgba(0, 0, 0, 0.7);
         z-index: 999;
         display: none;
-        touch-action: none;
       }
       .nav-overlay.active {
         display: block;
@@ -179,7 +171,6 @@
         text-align: right;
         font-size: clamp(0.85rem, 2.5vw, 0.95rem);
         transition: var(--transition);
-        touch-action: manipulation;
       }
       .nav-btn.active {
         background: var(--brand-color);
@@ -190,7 +181,7 @@
         max-width: 1200px;
         margin: 0 auto;
         padding: clamp(5px, 2vw, 10px) clamp(10px, 3vw, 15px)
-          clamp(70px, 15vh, 80px);
+          clamp(30px, 8vh, 50px);
         width: 100%;
         overflow-x: hidden;
       }
@@ -252,7 +243,6 @@
         cursor: pointer;
         opacity: 0;
         transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        touch-action: manipulation;
         width: 100%;
       }
 
@@ -305,38 +295,6 @@
         font-size: clamp(1rem, 3.2vw, 1.4rem);
       }
 
-      .no-delivery-badge {
-        position: absolute;
-        top: clamp(8px, 2vw, 10px);
-        left: clamp(8px, 2vw, 10px);
-        background: rgba(255, 255, 255, 0.9);
-        border: 2px solid var(--brand-color);
-        border-radius: 50%;
-        width: clamp(35px, 9vw, 45px);
-        height: clamp(35px, 9vw, 45px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 10;
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
-      }
-
-      .no-delivery-badge::after {
-        content: "";
-        position: absolute;
-        width: 100%;
-        height: 3px;
-        background: red;
-        transform: rotate(-45deg);
-        border-radius: 2px;
-      }
-
-      .no-delivery-badge img {
-        width: clamp(22px, 6vw, 40px);
-        height: clamp(22px, 6vw, 40px);
-        object-fit: contain;
-      }
-
       .modal {
         position: fixed;
         inset: 0;
@@ -374,520 +332,59 @@
         text-align: center;
       }
 
-      .money-calc-box {
-        background: rgba(226, 0, 4, 0.1);
-        padding: clamp(15px, 4vw, 20px);
-        border-radius: clamp(12px, 3vw, 15px);
-        margin: clamp(12px, 3vw, 15px) 0;
-        border: 2px solid var(--brand-color);
-      }
-      .input-group {
-        margin-bottom: clamp(12px, 3vw, 15px);
-        text-align: right;
-      }
-      .input-group label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: 700;
-        font-size: clamp(0.85rem, 2.5vw, 0.9rem);
-        color: #ddd;
-      }
-      .calc-input {
-        width: 100%;
-        padding: clamp(10px, 2.5vw, 12px);
-        background: #fff;
+      .close-btn {
+        float: left;
+        background: none;
         border: none;
-        color: #000;
-        border-radius: 8px;
-        font-size: clamp(1.1rem, 3.5vw, 1.3rem);
-        text-align: center;
-        font-family: inherit;
-        font-weight: bold;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-      }
-      .calc-input:focus {
-        outline: 3px solid var(--brand-color);
-      }
-      .calc-input::-webkit-outer-spin-button,
-      .calc-input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-      }
-      .calc-input[type="number"] {
-        -moz-appearance: textfield;
-      }
-
-      .weight-selector {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: clamp(6px, 2vw, 8px);
-        margin: clamp(12px, 3vw, 15px) 0;
-      }
-      .weight-btn {
-        padding: clamp(8px, 2.5vw, 10px);
-        border: 2px solid var(--brand-color);
-        background: transparent;
         color: white;
-        border-radius: 10px;
+        font-size: 1.8rem;
         cursor: pointer;
-        font-family: inherit;
-        font-weight: 600;
-        transition: 0.3s;
-        font-size: clamp(0.8rem, 2.5vw, 0.9rem);
-        touch-action: manipulation;
-      }
-      .weight-btn.active {
-        background: var(--brand-color);
+        padding: 5px 10px;
+        line-height: 1;
       }
 
-      .qty-control-wrapper {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: clamp(12px, 3.5vw, 15px);
-        margin: clamp(12px, 3vw, 15px) 0;
-        position: relative;
-      }
-      .qty-btn {
-        width: clamp(40px, 10vw, 45px);
-        height: clamp(40px, 10vw, 45px);
-        border-radius: clamp(10px, 2.5vw, 12px);
-        border: 2px solid var(--brand-color);
-        background: transparent;
-        color: white;
-        font-size: clamp(1.1rem, 3vw, 1.3rem);
-        cursor: pointer;
-        transition: 0.2s;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        touch-action: manipulation;
-      }
-      .qty-btn:active {
-        background: var(--brand-color);
-        transform: scale(0.9);
-      }
-      .qty-num {
-        font-size: clamp(1.2rem, 3.5vw, 1.4rem);
-        font-weight: 800;
-        min-width: clamp(70px, 18vw, 80px);
-        text-align: center;
-      }
-
-      .modal-button {
-        width: 100%;
-        padding: clamp(12px, 3vw, 14px);
-        border-radius: clamp(10px, 2.5vw, 12px);
-        border: none;
-        font-family: inherit;
-        font-weight: 700;
-        cursor: pointer;
-        margin-bottom: clamp(8px, 2vw, 10px);
-        display: block;
-        text-decoration: none;
-        text-align: center;
-        font-size: clamp(0.9rem, 2.5vw, 1rem);
-        transition: var(--transition);
-        touch-action: manipulation;
-      }
-      @media (hover: hover) {
-        .modal-button:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-      }
-      .btn-add {
-        background: var(--brand-color);
-        color: white;
-      }
-      .btn-add:disabled {
-        background: #555;
-        cursor: not-allowed;
-        opacity: 0.6;
-      }
-      .btn-wa {
-        background: #25d366;
-        color: white;
-      }
-      .btn-secondary {
-        background: #333;
-        color: white;
-      }
-
-      .no-delivery-notice {
-        background: rgb(26 26 26);
-        border: 2px solid var(--brand-color);
-        border-radius: clamp(8px, 2vw, 10px);
-        padding: clamp(12px, 3vw, 15px);
-        margin: clamp(12px, 3vw, 15px) 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: clamp(8px, 2vw, 10px);
-      }
-
-      .no-delivery-notice span {
-        font-weight: 700;
-        color: var(--text-primary);
-        font-size: clamp(0.85rem, 2.5vw, 1rem);
-        line-height: 1.4;
-      }
-      .no-delivery-notice span .text-red {
-        color: #e20004;
-      }
-
-      #cartButton {
-        position: fixed;
-        bottom: clamp(15px, 4vw, 20px);
-        left: clamp(15px, 4vw, 20px);
-        width: clamp(50px, 13vw, 60px);
-        height: clamp(50px, 13vw, 60px);
-        background: var(--brand-color);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: clamp(1.2rem, 3.5vw, 1.4rem);
-        cursor: pointer;
-        z-index: 1500;
-        border: none;
-        box-shadow: 0 5px 20px var(--shadow);
-        transition: transform 0.3s;
-        touch-action: manipulation;
-      }
-      #cartButton:active {
-        transform: scale(0.95);
-      }
-      #cartCount {
-        position: absolute;
-        top: -2px;
-        right: -2px;
-        background: white;
+      .close-btn:hover {
         color: var(--brand-color);
-        width: clamp(20px, 5.5vw, 24px);
-        height: clamp(20px, 5.5vw, 24px);
-        border-radius: 50%;
-        font-size: clamp(0.7rem, 2vw, 0.75rem);
-        font-weight: 900;
-        display: none;
-        align-items: center;
-        justify-content: center;
       }
 
-      #cartModal {
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.9);
-        z-index: 2100;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        padding: clamp(10px, 3vw, 15px);
-      }
-      #cartModal.active {
-        display: flex;
-      }
-      #cartContent {
-        background: var(--card-bg);
-        border-radius: clamp(15px, 4vw, 20px);
-        width: 100%;
-        max-width: min(550px, 95vw);
-        padding: clamp(15px, 4vw, 20px);
-        max-height: 90vh;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-      }
-      .cart-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: rgba(255, 255, 255, 0.05);
-        padding: clamp(10px, 2.5vw, 12px);
-        border-radius: clamp(8px, 2vw, 10px);
-        margin-bottom: clamp(8px, 2vw, 10px);
-        gap: clamp(8px, 2vw, 10px);
-        flex-wrap: wrap;
-      }
-      .cart-item-info {
-        flex: 1;
-        text-align: right;
-        font-size: clamp(0.85rem, 2.5vw, 0.95rem);
-        min-width: 0;
+      .modal-title {
+        font-size: clamp(1.2rem, 4vw, 1.5rem);
+        margin-bottom: 10px;
+        clear: both;
       }
 
-      .cart-qty-controls {
-        display: flex;
-        align-items: center;
-        gap: clamp(6px, 2vw, 8px);
-        background: rgba(0, 0, 0, 0.3);
-        padding: 2px 5px;
-        border-radius: 8px;
-      }
-      .mini-qty-btn {
-        width: clamp(26px, 7vw, 28px);
-        height: clamp(26px, 7vw, 28px);
-        border-radius: 5px;
-        border: none;
-        background: var(--brand-color);
-        color: white;
-        cursor: pointer;
-        font-size: clamp(0.9rem, 2.5vw, 1rem);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        touch-action: manipulation;
-      }
-
-      .form-group {
-        margin-bottom: clamp(12px, 3vw, 15px);
-        text-align: right;
-      }
-      .form-group label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: 600;
+      .modal-desc {
         color: var(--text-secondary);
-        font-size: clamp(0.85rem, 2.5vw, 0.95rem);
-      }
-      .form-group input,
-      .form-group textarea,
-      .form-group select {
-        width: 100%;
-        padding: clamp(10px, 2.5vw, 12px);
-        border-radius: clamp(8px, 2vw, 10px);
-        border: 1px solid rgba(226, 0, 4, 0.3);
-        background: rgba(255, 255, 255, 0.05);
-        color: white;
-        font-family: inherit;
-        font-size: clamp(0.9rem, 2.5vw, 1rem);
-        transition: 0.3s;
-      }
-      .form-group input:focus,
-      .form-group textarea:focus,
-      .form-group select:focus {
-        outline: none;
-        border-color: var(--brand-color);
-        background: rgba(255, 255, 255, 0.08);
-      }
-      .form-group textarea {
-        resize: vertical;
-        min-height: clamp(70px, 18vw, 80px);
+        margin: 10px 0;
+        font-size: clamp(0.85rem, 2.5vw, 1rem);
+        line-height: 1.6;
       }
 
-      .form-group select {
-        cursor: pointer;
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23e20004' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
-        background-repeat: no-repeat;
-        background-position: left clamp(10px, 2.5vw, 12px) center;
-        padding-right: clamp(35px, 9vw, 40px);
-      }
-
-      .form-group select option {
-        background: var(--card-bg);
-        color: white;
-        padding: 10px;
-      }
-
-      .delivery-price-display {
-        background: rgba(226, 0, 4, 0.1);
-        border: 2px solid var(--brand-color);
-        border-radius: clamp(8px, 2vw, 10px);
-        padding: clamp(10px, 2.5vw, 12px);
-        margin-top: clamp(8px, 2vw, 10px);
-        text-align: center;
-        font-weight: 700;
-        font-size: clamp(1rem, 3vw, 1.1rem);
+      .modal-price {
+        font-size: clamp(1.4rem, 4.5vw, 1.8rem);
         color: var(--brand-color);
-        display: none;
-      }
-
-      #confirmOrderModal .modal-content {
-        max-width: min(550px, 95vw);
-        border: 2px solid var(--brand-color);
-      }
-
-      .invoice-container {
-        background: #fff;
-        color: #000;
-        border-radius: clamp(10px, 2.5vw, 12px);
-        padding: clamp(15px, 4vw, 20px);
-        margin: clamp(8px, 2vw, 10px) 0;
-        direction: rtl;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-      }
-
-      .invoice-header {
-        text-align: center;
-        border-bottom: 2px dashed #ccc;
-        padding-bottom: clamp(12px, 3vw, 15px);
-        margin-bottom: clamp(12px, 3vw, 15px);
-      }
-
-      .invoice-header h3 {
-        color: var(--brand-color);
-        font-size: clamp(1.2rem, 3.5vw, 1.4rem);
-        margin-bottom: 5px;
-      }
-
-      .invoice-header p {
-        color: #666;
-        font-size: clamp(0.75rem, 2vw, 0.85rem);
-        margin: 0;
-      }
-
-      .invoice-customer {
-        background: #f8f8f8;
-        padding: clamp(10px, 2.5vw, 12px);
-        border-radius: 8px;
-        margin-bottom: clamp(12px, 3vw, 15px);
-      }
-
-      .invoice-customer-row {
-        display: flex;
-        margin-bottom: clamp(6px, 2vw, 8px);
-        font-size: clamp(0.8rem, 2.3vw, 0.9rem);
-        align-items: flex-start;
-        flex-wrap: wrap;
-      }
-
-      .invoice-customer-row:last-child {
-        margin-bottom: 0;
-      }
-
-      .invoice-customer-label {
-        font-weight: 700;
-        color: #333;
-        min-width: clamp(55px, 15vw, 65px);
-        flex-shrink: 0;
-      }
-
-      .invoice-customer-value {
-        color: #555;
-        flex: 1;
-        word-break: break-word;
-      }
-
-      .invoice-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: clamp(12px, 3vw, 15px);
-        font-size: clamp(0.7rem, 2vw, 0.8rem);
-        min-width: 280px;
-      }
-
-      .invoice-table th {
-        background: var(--brand-color);
-        color: white;
-        padding: clamp(8px, 2vw, 10px) clamp(3px, 1.5vw, 5px);
-        text-align: center;
-        font-weight: 700;
-        font-size: clamp(0.65rem, 1.8vw, 0.75rem);
-        white-space: nowrap;
-      }
-
-      .invoice-table th:first-child {
-        text-align: right;
-        padding-right: clamp(8px, 2vw, 10px);
-      }
-
-      .invoice-table td {
-        padding: clamp(8px, 2vw, 10px) clamp(3px, 1.5vw, 5px);
-        text-align: center;
-        border-bottom: 1px solid #eee;
-        vertical-align: middle;
-      }
-
-      .invoice-table td:first-child {
-        text-align: right;
-        padding-right: clamp(8px, 2vw, 10px);
-        font-weight: 600;
-        max-width: 150px;
-      }
-
-      .invoice-table tbody tr:hover {
-        background: #f9f9f9;
-      }
-
-      .invoice-table .delivery-row {
-        background: #fff8e1;
-      }
-
-      .invoice-table .delivery-row td {
-        font-weight: 600;
-        color: #e65100;
-        border-bottom: 2px solid var(--brand-color);
-      }
-
-      .invoice-total-box {
-        background: linear-gradient(135deg, var(--brand-color), #ff3333);
-        color: white;
-        padding: clamp(8px, 2vw, 10px);
-        border-radius: clamp(8px, 2vw, 10px);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        text-align: center;
-      }
-
-      .invoice-total-label {
-        font-size: clamp(0.85rem, 2.5vw, 0.95rem);
-        margin-bottom: 5px;
-      }
-
-      .invoice-total-amount {
-        font-size: clamp(1.5rem, 4.5vw, 1.8rem);
         font-weight: 800;
+        margin: 15px 0;
       }
 
-      .invoice-footer {
-        text-align: center;
-        margin-top: clamp(12px, 3vw, 15px);
-        padding-top: clamp(12px, 3vw, 15px);
-        border-top: 2px dashed #ccc;
-        font-size: clamp(0.75rem, 2vw, 0.8rem);
-        color: #888;
-      }
-
-      /* Small phones */
       @media (max-width: 360px) {
         .burger-text {
           display: none;
         }
-        .container {
-          padding-bottom: 60px;
-        }
       }
 
-      /* Medium phones */
       @media (max-width: 480px) {
         .burger-text {
           display: none;
         }
       }
 
-      /* Tablets Portrait */
-      @media (min-width: 768px) and (max-width: 1024px) {
-        .modal-content {
-          max-width: 600px;
-        }
-        #cartContent {
-          max-width: 600px;
-        }
-      }
-
-      /* Tablets Landscape & Small Desktops */
       @media (min-width: 1024px) {
         .burger-text {
           display: inline;
         }
       }
 
-      /* Large Screens */
       @media (min-width: 1440px) {
         .container {
           max-width: 1400px;
@@ -924,16 +421,9 @@
         border-radius: 4px;
       }
 
-      /* Touch device optimizations */
       @media (hover: none) {
         .product-card:active {
           transform: scale(0.98);
-        }
-        .modal-button:active {
-          transform: scale(0.98);
-        }
-        .weight-btn:active {
-          transform: scale(0.95);
         }
       }
     </style>
@@ -966,323 +456,15 @@
       <div class="modal-content">
         <img id="modalImage" class="modal-image" src="" alt="" />
         <div class="modal-body">
-          <button
-            onclick="closeModal()"
-            style="
-              float: left;
-              background: none;
-              border: none;
-              color: white;
-              font-size: 1.5rem;
-              cursor: pointer;
-            "
-          >
-            &times;
-          </button>
-          <h2 id="modalTitle"></h2>
-          <p
-            id="modalDesc"
-            style="
-              color: var(--text-secondary);
-              margin: 10px 0;
-              font-size: 0.9rem;
-            "
-          ></p>
-          <div
-            id="modalPrice"
-            style="
-              font-size: 1.6rem;
-              color: var(--brand-color);
-              font-weight: 800;
-              margin: 10px 0;
-            "
-          ></div>
-
-          <div
-            id="noDeliveryNotice"
-            class="no-delivery-notice"
-            style="display: none"
-          >
-            <span
-              >🚫 هذا المنتج متوفر للطلب من
-              <span class="text-red">المطعم فقط</span> - لا يوجد توصيل</span
-            >
-          </div>
-
-          <div id="moneyCalcBox" class="money-calc-box" style="display: none">
-            <div class="input-group">
-              <label>💰 أدخل المبلغ الذي تريد دفعه (شيكل)</label>
-              <input
-                type="number"
-                id="priceInput"
-                class="calc-input"
-                placeholder="أدخل السعر"
-                step="1"
-                oninput="updateFromPrice()"
-              />
-            </div>
-            <div id="weightSelector" class="weight-selector"></div>
-          </div>
-
-          <div
-            class="qty-control-wrapper"
-            id="qtyControlNormal"
-            style="display: none"
-          >
-            <button class="qty-btn" onclick="changeActiveQty(-1)">
-              <i class="fas fa-minus"></i>
-            </button>
-            <span class="qty-num" id="activeQtyDisplay">1</span>
-            <button class="qty-btn" onclick="changeActiveQty(1)">
-              <i class="fas fa-plus"></i>
-            </button>
-          </div>
-
-          <div
-            class="qty-control-wrapper"
-            id="qtyControlWeight"
-            style="display: none"
-          >
-            <button class="qty-btn" onclick="adjustWeight(-1)">
-              <i class="fas fa-minus"></i>
-            </button>
-            <span class="qty-num" id="weightDisplay">1 كغ</span>
-            <button class="qty-btn" onclick="adjustWeight(1)">
-              <i class="fas fa-plus"></i>
-            </button>
-          </div>
-
-          <button class="modal-button btn-add" id="addToCartBtn">
-            <i class="fas fa-cart-plus"></i> أضف إلى السلة
-          </button>
-          <a
-            href="#"
-            id="modalWaBtn"
-            target="_blank"
-            class="modal-button btn-wa"
-            ><i class="fab fa-whatsapp"></i> اطلب الآن</a
-          >
-        </div>
-      </div>
-    </div>
-
-    <button id="cartButton">
-      <i class="fas fa-shopping-basket"></i>
-      <span id="cartCount">0</span>
-    </button>
-
-    <!-- Cart Modal -->
-    <div id="cartModal">
-      <div id="cartContent">
-        <h2
-          style="
-            margin-bottom: 20px;
-            border-bottom: 2px solid var(--brand-color);
-            padding-bottom: 10px;
-          "
-        >
-          سلة الطلبات
-        </h2>
-        <div id="cartItemsList"></div>
-        <div
-          id="cartTotal"
-          style="
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: var(--brand-color);
-            text-align: center;
-            margin: 20px 0;
-            padding: 15px;
-            background: rgba(226, 0, 4, 0.1);
-            border-radius: 10px;
-          "
-        >
-          المجموع: 0 ₪
-        </div>
-        <button
-          id="sendCartBtn"
-          class="modal-button btn-wa"
-          style="background: #25d366; margin-bottom: 10px"
-        >
-          <i class="fab fa-whatsapp"></i> إتمام الطلب
-        </button>
-        <button id="clearCartBtn" class="modal-button btn-secondary">
-          إفراغ السلة
-        </button>
-        <button
-          onclick="
-            document.getElementById('cartModal').classList.remove('active')
-          "
-          style="
-            width: 100%;
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            cursor: pointer;
-            padding: 10px;
-          "
-        >
-          إغلاق
-        </button>
-      </div>
-    </div>
-
-    <!-- Customer Data Modal WITH Province and Location Selects -->
-    <div class="modal" id="customerModal">
-      <div class="modal-content">
-        <div class="modal-body">
-          <h2 style="margin-bottom: 20px; text-align: center">
-            <i class="fas fa-user-circle" style="color: var(--brand-color)"></i>
-            معلومات التوصيل
-          </h2>
-          <form id="customerForm">
-            <div class="form-group">
-              <label><i class="fas fa-user"></i> الاسم الكامل *</label>
-              <input
-                type="text"
-                id="customerName"
-                placeholder="أدخل اسمك"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <label><i class="fas fa-phone"></i> رقم الهاتف *</label>
-              <input
-                type="tel"
-                id="customerPhone"
-                placeholder="059XXXXXXXX"
-                required
-                maxlength="10"
-              />
-            </div>
-            <!-- Province Select -->
-            <div class="form-group">
-              <label><i class="fas fa-city"></i> المحافظة *</label>
-              <select id="provinceSelect" required>
-                <option value="">-- اختر المحافظة --</option>
-                <option value="gaza">محافظة غزة</option>
-                <option value="middle">المحافظة الوسطى</option>
-              </select>
-            </div>
-
-            <!-- Location Select (Areas) -->
-            <div class="form-group" id="locationGroup" style="display: none">
-              <label
-                ><i class="fas fa-map-marked-alt"></i> منطقة التوصيل *</label
-              >
-              <select id="locationSelect" required disabled>
-                <option value="">-- اختر المنطقة --</option>
-              </select>
-              <div id="deliveryPriceDisplay" class="delivery-price-display">
-                رسوم التوصيل: 0 ₪
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label
-                ><i class="fas fa-map-marker-alt"></i> العنوان بالتفصيل *</label
-              >
-              <textarea
-                id="customerAddress"
-                placeholder="مثال: حي الشيخ رضوان، شارع الجلاء، بجانب مسجد..."
-                required
-              ></textarea>
-            </div>
-
-            <button type="submit" class="modal-button btn-add">
-              <i class="fas fa-check-circle"></i> تاكيد الطلب
-            </button>
-          </form>
-          <button onclick="backToCart()" class="modal-button btn-secondary">
-            <i class="fas fa-arrow-right"></i> العودة للسلة
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Confirmation Modal with Invoice -->
-    <div class="modal" id="confirmOrderModal">
-      <div class="modal-content">
-        <div class="modal-body" style="padding: 15px">
-          <button
-            onclick="
-              document
-                .getElementById('confirmOrderModal')
-                .classList.remove('active')
-            "
-            style="
-              float: left;
-              background: none;
-              border: none;
-              color: white;
-              font-size: 1.5rem;
-              cursor: pointer;
-            "
-          >
-            &times;
-          </button>
-          <h2
-            style="margin-bottom: 15px; color: var(--brand-color); clear: both"
-          >
-            <i class="fas fa-file-invoice"></i> تأكيد الطلب
-          </h2>
-
-          <!-- Invoice Container -->
-          <div class="invoice-container" id="invoiceContainer"></div>
-
-          <div style="display: flex; gap: 10px; margin-top: 15px">
-            <button
-              onclick="editOrder()"
-              class="modal-button btn-secondary"
-              style="margin: 0"
-            >
-              <i class="fas fa-edit"></i> تعديل
-            </button>
-            <button
-              onclick="executeWhatsAppSend()"
-              class="modal-button btn-wa"
-              style="margin: 0"
-            >
-              <i class="fab fa-whatsapp"></i> إرسال الطلب
-            </button>
-          </div>
+          <button class="close-btn" onclick="closeModal()">&times;</button>
+          <h2 class="modal-title" id="modalTitle"></h2>
+          <p class="modal-desc" id="modalDesc"></p>
+          <div class="modal-price" id="modalPrice"></div>
         </div>
       </div>
     </div>
 
     <script>
-      // ================= CONFIGURATION =================
-      const CONFIG = {
-        whatsappNumbers: {
-          gaza: "972595201049",
-          middle: "972597111811",
-        },
-        deliveryLocations: {
-          gaza: [
-            { name: "غزة - المدينة", price: 5 },
-            { name: "غزة - الشمال", price: 8 },
-            { name: "غزة - الرمال", price: 5 },
-            { name: "غزة - الشيخ رضوان", price: 6 },
-            { name: "غزة - النصر", price: 7 },
-          ],
-          middle: [
-            { name: "النصيرات", price: 10 },
-            { name: "البريج", price: 15 },
-            { name: "سوارحة الشرقية", price: 15 },
-            { name: "سوارحة الغربية", price: 15 },
-            { name: "الزوايدة", price: 20 },
-            { name: "المغازي", price: 25 },
-            { name: "دير البلح", price: 30 },
-          ],
-        },
-      };
-
-      // State
-      let currentProvince = null;
-      let selectedLocation = null;
-      let customerInfo = { name: "", phone: "", address: "" };
-
-      // ================= MENU DATA =================
       const menuData = {
         shawarma: {
           title: "🌯 الشاورما",
@@ -1312,11 +494,7 @@
               price: 25,
               image: "./img/Shawarma-section/48.jpg",
             },
-            {
-              name: "سوري",
-              price: 35,
-              image: "./img/Shawarma-section/53.jpg",
-            },
+            { name: "سوري", price: 35, image: "./img/Shawarma-section/53.jpg" },
             {
               name: "صفيحة",
               price: 38,
@@ -1328,13 +506,6 @@
               price: 40,
               desc: "خبزة باشكا - شاورما - جبنة - زيتون - صوص بيكانتي",
               image: "./img/Shawarma-section/18.jpg",
-            },
-            {
-              name: "صاروخ",
-              price: 35,
-              image:
-                "https://images.unsplash.com/photo-1585238341710-4a437b2de7b8?w=800&q=80",
-              active: false,
             },
             {
               name: "شاورما عربي",
@@ -1366,7 +537,7 @@
             {
               name: "كاليزوني دجاج",
               price: 25,
-              desc: "صدر دجاج - جبنة - زيتون - رانش ",
+              desc: "صدر دجاج - جبنة - زيتون - رانش",
               image: "./img/Italian-section/35.jpg",
             },
             {
@@ -1388,12 +559,11 @@
               image: "./img/Italian-section/34.jpg",
             },
             {
-              name: "بيتزا ",
+              name: "بيتزا",
               price: 20,
-              desc: "خضار - ذرة - زيتون ",
+              desc: "خضار - ذرة - زيتون",
               image: "./img/Italian-section/32.jpg",
             },
-
             {
               name: "بيتزا ماما روزا بالاناناس",
               price: 20,
@@ -1415,7 +585,7 @@
             {
               name: "صوص إضافي",
               price: 3,
-              image: "./img/Italian-section/7.jpg",
+              image: "./img/Italian-section/7.jpeg",
             },
           ],
         },
@@ -1429,7 +599,7 @@
               image: "./img/Western-Food-Section/44.jpg",
             },
             {
-              name: " بيف برجر",
+              name: "بيف برجر",
               price: 25,
               desc: "قطعة لحمة - بصل - بندورة - جبنة - مخلل - صوص بيكانتي",
               image: "./img/Western-Food-Section/40.jpg",
@@ -1467,7 +637,7 @@
             {
               name: "نمورة",
               pricePerKg: 25,
-              image: "./img/Oriental-Sweets-Section/25.jpg",
+              image: "./img/Oriental-Sweets-Section/55.jpg",
             },
             {
               name: "معكوفة لوز",
@@ -1479,13 +649,11 @@
               pricePerKg: 35,
               image: "./img/Oriental-Sweets-Section/2.jpg",
             },
-
             {
               name: "معكوفة عين جمل",
               pricePerKg: 35,
               image: "./img/Oriental-Sweets-Section/26.jpg",
             },
-
             {
               name: "وربات",
               pricePerKg: 35,
@@ -1510,13 +678,6 @@
               name: "كلّ وشكر",
               pricePerKg: 35,
               image: "./img/Oriental-Sweets-Section/5.jpg",
-            },
-            {
-              name: "اسطنبولية",
-              pricePerKg: 35,
-              image:
-                "https://images.unsplash.com/photo-1608198399988-841b00f31d2b?w=800&q=80",
-              active: false,
             },
             {
               name: "كنافة عربية",
@@ -1544,36 +705,19 @@
               image: "./img/Oriental-Sweets-Section/10.jpg",
             },
             {
-              name: "أساور ",
+              name: "أساور",
               pricePerKg: 48,
               image: "./img/Oriental-Sweets-Section/19.jpeg",
             },
-
             {
               name: "نابلسية",
               pricePerKg: 50,
               image: "./img/Oriental-Sweets-Section/23.jpg",
             },
-
             {
               name: "كاسات مكسرات",
               pricePerKg: 80,
               image: "./img/Oriental-Sweets-Section/24.jpg",
-            },
-            {
-              name: "بورما حلبي",
-              pricePerKg: 100,
-              image:
-                "https://images.unsplash.com/photo-1599599810769-bcde5a160d32?w=800&q=80",
-              active: false,
-            },
-
-            {
-              name: "بلورية حلبي",
-              pricePerKg: 130,
-              image:
-                "https://images.unsplash.com/photo-1571167530149-c6f274f6db8f?w=800&q=80",
-              active: false,
             },
             {
               name: "دولمة حلبي",
@@ -1600,27 +744,18 @@
               price: 120,
               image: "./img/Cake-section/38.jpg",
             },
-            {
-              name: "سويس رول",
-              price: 8,
-              image: "./img/Cake-section/31.jpg",
-            },
-            {
-              name: "تريلتشا",
-              price: 10,
-              image: "./img/Cake-section/21.jpg",
-            },
-
+            { name: "سويس رول", price: 8, image: "./img/Cake-section/31.jpg" },
+            { name: "تريلتشا", price: 10, image: "./img/Cake-section/21.jpg" },
             {
               name: "قطع كيك سبيشل",
               price: 15,
-              desc: "  نوتيلا / بيستاشيو / لوتس",
+              desc: "نوتيلا / بيستاشيو / لوتس",
               image: "./img/Cake-section/30.jpg",
             },
             {
               name: "سوبريم",
               price: 20,
-              desc: " لوتس - نوتيلا - بيستاشيو",
+              desc: "لوتس - نوتيلا - بيستاشيو",
               image: "./img/Cake-section/28.jpg",
             },
             {
@@ -1629,11 +764,7 @@
               desc: "كيندر- لوتس - نوتيلا - بيستاشيو",
               image: "./img/Cake-section/4.jpg",
             },
-            {
-              name: "تشيس كيك",
-              price: 15,
-              image: "./img/Cake-section/7.jpg",
-            },
+            { name: "تشيس كيك", price: 15, image: "./img/Cake-section/7.jpg" },
             {
               name: "كرانش بار",
               price: 15,
@@ -1659,22 +790,14 @@
               price: 30,
               image: "./img/Bar-section/64.jpg",
             },
-            {
-              name: "كريب دبي",
-              price: 30,
-              image: "./img/Bar-section/14.jpg",
-            },
+            { name: "كريب دبي", price: 30, image: "./img/Bar-section/14.jpg" },
             {
               name: "بان كيك نوتيلا",
               price: 30,
-              desc: "  نوتيلا / بيستاشيو / لوتس",
+              desc: "نوتيلا / بيستاشيو / لوتس",
               image: "./img/Bar-section/13.jpg",
             },
-            {
-              name: "رينجز",
-              price: 25,
-              image: "./img/Bar-section/56.jpg",
-            },
+            { name: "رينجز", price: 25, image: "./img/Bar-section/56.jpg" },
             {
               name: "لقيمات شوكولاتة",
               price: 15,
@@ -1685,28 +808,9 @@
               price: 30,
               image: "./img/Bar-section/55.jpg",
             },
-            {
-              name: "بان كيك شوكولاتة",
-              price: 15,
-              image:
-                "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800&q=80",
-              active: false,
-            },
-            {
-              name: "مولتن كيك",
-              price: 25,
-              image: "./img/Bar-section/37.jpg",
-            },
-            {
-              name: "هوت كيك",
-              price: 25,
-              image: "./img/Bar-section/59.jpg",
-            },
-            {
-              name: "براونيز",
-              price: 25,
-              image: "./img/Bar-section/38.jpg",
-            },
+            { name: "مولتن كيك", price: 25, image: "./img/Bar-section/37.jpg" },
+            { name: "هوت كيك", price: 25, image: "./img/Bar-section/59.jpg" },
+            { name: "براونيز", price: 25, image: "./img/Bar-section/38.jpg" },
             {
               name: "كنافة نويتلا",
               price: 15,
@@ -1722,82 +826,17 @@
             { name: "ليمون ونعنع", price: 12, image: "./img/drinks/3.jpg" },
             { name: "أفوكادو", price: 18, image: "./img/drinks/4.jpg" },
             { name: "شوكو بارد", price: 12, image: "./img/drinks/7.jpg" },
-            { name: "ايس موكا ", price: 12, image: "./img/drinks/5.jpg" },
-            {
-              name: "آيس كافي",
-              price: 12,
-              image: "./img/drinks/10.jpg",
-            },
-            {
-              name: "ميلك شيك",
-              price: 15,
-              image: "./img/drinks/8.jpg",
-            },
+            { name: "ايس موكا", price: 12, image: "./img/drinks/5.jpg" },
+            { name: "آيس كافي", price: 12, image: "./img/drinks/10.jpg" },
+            { name: "ميلك شيك", price: 15, image: "./img/drinks/8.jpg" },
             { name: "موهيتو", price: 25, image: "./img/drinks/16.jpg" },
-            {
-              name: "آيس كريم",
-              price: 10,
-              image: "./img/drinks/14.jpg",
-            },
-            {
-              name: "براد",
-              price: 5,
-              image: "./img/drinks/15.jpg",
-            },
-            {
-              name: "نسكافيه",
-              price: 7,
-              image: "./img/drinks/9.jpg",
-            },
-            {
-              name: "كابتشينو",
-              price: 10,
-              image:
-                "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=800&q=80",
-              active: false,
-            },
-            {
-              name: "إسبريسو سنجل",
-              price: 7,
-              image:
-                "https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=800&q=80",
-              active: false,
-            },
-            {
-              name: "إسبريسو دبل",
-              price: 10,
-              image:
-                "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&q=80",
-              active: false,
-            },
-            {
-              name: "قهوة تركي دبل",
-              price: 10,
-              image: "./img/drinks/6.jpg",
-              active: false,
-            },
-            {
-              name: "شاي",
-              price: 5,
-              image: "./img/drinks/11.jpg",
-            },
-
-            {
-              name: "بلو",
-              price: 4,
-              image: "./img/drinks/17.jpg",
-            },
-            {
-              name: "كوكا كولا",
-              price: 4,
-              image: "./img/drinks/18.jpg",
-            },
-            {
-              name: "سبرايت",
-              price: 4,
-              image: "./img/drinks/19.jpg",
-            },
-
+            { name: "آيس كريم", price: 10, image: "./img/drinks/14.jpg" },
+            { name: "براد", price: 5, image: "./img/drinks/15.jpg" },
+            { name: "نسكافيه", price: 7, image: "./img/drinks/9.jpg" },
+            { name: "شاي", price: 5, image: "./img/drinks/11.jpg" },
+            { name: "بلو", price: 4, image: "./img/drinks/17.jpg" },
+            { name: "كوكا كولا", price: 5, image: "./img/drinks/18.jpg" },
+            { name: "سبرايت", price: 5, image: "./img/drinks/19.jpg" },
             {
               name: "مياه معدنية 200 ملم",
               price: 1,
@@ -1813,21 +852,9 @@
         salads: {
           title: "🥗 السلطات",
           items: [
-            {
-              name: "صوص بيكانتي",
-              price: 5,
-              image: "./img/salad/1.jpeg",
-            },
-            {
-              name: "صوص ثومية",
-              price: 5,
-              image: "./img/salad/2.jpeg",
-            },
-            {
-              name: "سلطة تركية",
-              price: 5,
-              image: "./img/salad/4.jpeg",
-            },
+            { name: "صوص بيكانتي", price: 5, image: "./img/salad/1.jpeg" },
+            { name: "صوص ثومية", price: 5, image: "./img/salad/2.jpeg" },
+            { name: "سلطة تركية", price: 5, image: "./img/salad/4.jpeg" },
             {
               name: "سلطة ملفوف بالمايونيز",
               price: 5,
@@ -1838,30 +865,12 @@
               price: 5,
               image: "./img/salad/5.jpeg",
             },
-            {
-              name: "سلطة كول سلو",
-              price: 5,
-              image: "./img/salad/6.jpeg",
-            },
-            {
-              name: "بطاطا كبيرة",
-              price: 10,
-              image: "./img/salad/20.jpeg",
-            },
-            {
-              name: "بطاطا صغيرة",
-              price: 5,
-              image: "./img/salad/20.jpeg",
-            },
+            { name: "سلطة كول سلو", price: 5, image: "./img/salad/6.jpeg" },
+            { name: "بطاطا كبيرة", price: 10, image: "./img/salad/20.jpeg" },
+            { name: "بطاطا صغيرة", price: 5, image: "./img/salad/20.jpeg" },
           ],
         },
       };
-
-      let cart = [];
-      let activeProduct = null;
-      let activeQty = 1;
-      let calculatedWeight = 1;
-      let calculatedPrice = 0;
 
       function init() {
         const navBtns = document.getElementById("navButtons");
@@ -1892,12 +901,14 @@
             const displayPrice = item.pricePerKg
               ? `${item.pricePerKg} ₪/كغ`
               : `${item.price} ₪`;
-            const noDeliveryBadge =
-              item.delivery === false
-                ? `<div class="no-delivery-badge"><img src="./img/o2_delivery_icon.ico" alt="لا توصيل" onerror="this.outerHTML='🚫'" /></div>`
-                : "";
 
-            card.innerHTML = `${noDeliveryBadge}<img src="${item.image}" onerror="this.src='https://via.placeholder.com/400x600?text=صورة+غير+متوفرة'"><div class="card-overlay"><h3>${item.name}</h3><div class="product-price">${displayPrice}</div></div>`;
+            card.innerHTML = `
+              <img src="${item.image}" onerror="this.src='https://via.placeholder.com/400x600?text=صورة+غير+متوفرة'">
+              <div class="card-overlay">
+                <h3>${item.name}</h3>
+                <div class="product-price">${displayPrice}</div>
+              </div>
+            `;
             card.onclick = () => openModal(item, menuData[key].byWeight);
             grid.appendChild(card);
           });
@@ -1907,69 +918,6 @@
         });
 
         setTimeout(revealProducts, 100);
-        setupProvinceSelect();
-      }
-
-      function setupProvinceSelect() {
-        const provinceSelect = document.getElementById("provinceSelect");
-        const locationSelect = document.getElementById("locationSelect");
-        const locationGroup = document.getElementById("locationGroup");
-        const deliveryPriceDisplay = document.getElementById(
-          "deliveryPriceDisplay",
-        );
-
-        provinceSelect.addEventListener("change", function () {
-          const province = this.value;
-          currentProvince = province;
-
-          locationSelect.innerHTML =
-            '<option value="">-- اختر المنطقة --</option>';
-          deliveryPriceDisplay.style.display = "none";
-          selectedLocation = null;
-
-          if (province) {
-            locationGroup.style.display = "block";
-            locationSelect.disabled = false;
-
-            const locations = CONFIG.deliveryLocations[province] || [];
-            locations.forEach((loc) => {
-              const option = document.createElement("option");
-              option.value = loc.name;
-              option.dataset.price = loc.price;
-              option.textContent = `${loc.name} - رسوم التوصيل: ${loc.price} ₪`;
-              locationSelect.appendChild(option);
-            });
-          } else {
-            locationGroup.style.display = "none";
-            locationSelect.disabled = true;
-          }
-        });
-
-        locationSelect.addEventListener("change", function () {
-          const deliveryPriceDisplay = document.getElementById(
-            "deliveryPriceDisplay",
-          );
-
-          if (this.value && currentProvince) {
-            const locations = CONFIG.deliveryLocations[currentProvince] || [];
-            selectedLocation = locations.find((loc) => loc.name === this.value);
-
-            if (selectedLocation) {
-              deliveryPriceDisplay.textContent = `رسوم التوصيل: ${selectedLocation.price} ₪`;
-              deliveryPriceDisplay.style.display = "block";
-            }
-          } else {
-            deliveryPriceDisplay.style.display = "none";
-            selectedLocation = null;
-          }
-        });
-      }
-
-      function getWhatsAppNumber() {
-        if (currentProvince && CONFIG.whatsappNumbers[currentProvince]) {
-          return CONFIG.whatsappNumbers[currentProvince];
-        }
-        return CONFIG.whatsappNumbers.gaza;
       }
 
       function showSection(id) {
@@ -1988,402 +936,20 @@
       }
 
       function openModal(item, isByWeight) {
-        activeProduct = { ...item, isByWeight };
-        activeQty = 1;
-
         document.getElementById("modalTitle").textContent = item.name;
         document.getElementById("modalDesc").textContent = item.desc || "";
         document.getElementById("modalImage").src = item.image;
 
-        const moneyCalcBox = document.getElementById("moneyCalcBox");
-        const qtyControlNormal = document.getElementById("qtyControlNormal");
-        const qtyControlWeight = document.getElementById("qtyControlWeight");
-        const weightSelector = document.getElementById("weightSelector");
-        const priceInput = document.getElementById("priceInput");
-        const noDeliveryNotice = document.getElementById("noDeliveryNotice");
-        const addToCartBtn = document.getElementById("addToCartBtn");
-        const modalWaBtn = document.getElementById("modalWaBtn");
+        const displayPrice = isByWeight
+          ? `${item.pricePerKg} ₪/كغ`
+          : `${item.price} ₪`;
+        document.getElementById("modalPrice").textContent = displayPrice;
 
-        const canDeliver = item.delivery !== false;
-
-        if (canDeliver) {
-          noDeliveryNotice.style.display = "none";
-          addToCartBtn.style.display = "block";
-          addToCartBtn.disabled = false;
-          addToCartBtn.innerHTML =
-            '<i class="fas fa-cart-plus"></i> أضف إلى السلة';
-          modalWaBtn.style.display = "block";
-        } else {
-          noDeliveryNotice.style.display = "flex";
-          addToCartBtn.style.display = "none";
-          modalWaBtn.style.display = "none";
-        }
-
-        if (isByWeight) {
-          moneyCalcBox.style.display = "block";
-          qtyControlNormal.style.display = "none";
-          qtyControlWeight.style.display = canDeliver ? "flex" : "none";
-          calculatedWeight = 1;
-          calculatedPrice = calculatedWeight * item.pricePerKg;
-          priceInput.value = "";
-
-          weightSelector.innerHTML = "";
-          [0.25, 0.5, 0.75, 1].forEach((w) => {
-            const btn = document.createElement("button");
-            btn.className = `weight-btn ${w === 1 ? "active" : ""}`;
-            btn.textContent = w + " كغ";
-            btn.onclick = function () {
-              document
-                .querySelectorAll(".weight-btn")
-                .forEach((b) => b.classList.remove("active"));
-              this.classList.add("active");
-              setWeight(w);
-            };
-            weightSelector.appendChild(btn);
-          });
-          refreshWeightUI();
-        } else {
-          moneyCalcBox.style.display = "none";
-          qtyControlNormal.style.display = canDeliver ? "flex" : "none";
-          qtyControlWeight.style.display = "none";
-          updateModalPrice();
-        }
-
-        updateModalUI();
         document.getElementById("productModal").classList.add("active");
-      }
-
-      function updateFromPrice() {
-        const val = parseFloat(document.getElementById("priceInput").value);
-        if (!isNaN(val) && val > 0) {
-          setWeight(val / activeProduct.pricePerKg);
-          document
-            .querySelectorAll(".weight-btn")
-            .forEach((b) => b.classList.remove("active"));
-        }
-      }
-
-      function setWeight(w) {
-        calculatedWeight = w;
-        calculatedPrice = w * activeProduct.pricePerKg;
-        refreshWeightUI();
-      }
-
-      function adjustWeight(delta) {
-        let newWeight = parseFloat((calculatedWeight + delta).toFixed(2));
-        if (newWeight < 0.25) newWeight = 0.25;
-        setWeight(newWeight);
-        document.querySelectorAll(".weight-btn").forEach((b) => {
-          b.classList.toggle("active", parseFloat(b.textContent) === newWeight);
-        });
-      }
-
-      function refreshWeightUI() {
-        document.getElementById("weightDisplay").textContent =
-          calculatedWeight.toFixed(2) + " كغ";
-        document.getElementById("modalPrice").innerHTML =
-          `${calculatedPrice.toFixed(
-            1,
-          )} ₪ <span style="font-size:0.9rem; color:#888; font-weight:400;">(${calculatedWeight.toFixed(
-            2,
-          )} كغ × ${activeProduct.pricePerKg} ₪/كغ)</span>`;
-        updateModalUI();
-      }
-
-      function changeActiveQty(val) {
-        activeQty = Math.max(1, activeQty + val);
-        updateModalPrice();
-        updateModalUI();
-      }
-
-      function updateModalPrice() {
-        if (!activeProduct.isByWeight) {
-          document.getElementById("modalPrice").textContent = `${(
-            activeProduct.price * activeQty
-          ).toFixed(1)} ₪`;
-        }
-      }
-
-      function updateModalUI() {
-        document.getElementById("activeQtyDisplay").textContent = activeQty;
-        const waNumber = getWhatsAppNumber();
-        const waText =
-          activeProduct.isByWeight && calculatedWeight > 0
-            ? `أريد طلب: ${activeProduct.name} - وزن ${calculatedWeight.toFixed(
-                2,
-              )} كغ (السعر ${calculatedPrice.toFixed(1)} شيكل)`
-            : activeProduct.isByWeight
-              ? `أريد طلب: ${activeProduct.name}`
-              : `أريد طلب: ${activeProduct.name} × ${activeQty}`;
-        document.getElementById("modalWaBtn").href =
-          `https://wa.me/${waNumber}?text=${encodeURIComponent(waText)}`;
       }
 
       function closeModal() {
         document.getElementById("productModal").classList.remove("active");
-      }
-
-      function addToCart() {
-        if (activeProduct.delivery === false) {
-          showToast("هذا المنتج غير متاح للتوصيل");
-          return;
-        }
-
-        if (
-          activeProduct.isByWeight &&
-          (calculatedPrice <= 0 || calculatedWeight <= 0)
-        ) {
-          showToast("يرجى تحديد الكمية أو السعر");
-          return;
-        }
-
-        const itemKey = activeProduct.isByWeight
-          ? `${activeProduct.name}-${calculatedWeight}`
-          : activeProduct.name;
-        const existing = cart.find((i) => i.key === itemKey);
-
-        if (existing) {
-          existing.qty += activeQty;
-          showToast(`تم تحديث ${activeProduct.name} في السلة`);
-        } else {
-          const qtyToAdd = activeProduct.isByWeight ? 1 : activeQty;
-          cart.push({
-            key: itemKey,
-            name: activeProduct.name,
-            price: activeProduct.isByWeight
-              ? calculatedPrice
-              : activeProduct.price,
-            unitPrice: activeProduct.isByWeight
-              ? activeProduct.pricePerKg
-              : activeProduct.price,
-            qty: qtyToAdd,
-            weight: activeProduct.isByWeight ? calculatedWeight : null,
-            isByWeight: activeProduct.isByWeight,
-          });
-          showToast(`تم إضافة ${activeProduct.name} إلى السلة`);
-        }
-
-        updateCartBadge();
-        updateCartUI();
-        closeModal();
-      }
-
-      function updateCartBadge() {
-        const total = cart.reduce((acc, curr) => acc + curr.qty, 0);
-        const badge = document.getElementById("cartCount");
-        badge.textContent = total;
-        badge.style.display = total > 0 ? "flex" : "none";
-      }
-
-      function updateCartUI() {
-        const list = document.getElementById("cartItemsList");
-        list.innerHTML = "";
-        let total = 0;
-
-        cart.forEach((item, idx) => {
-          const itemTotal = item.price * item.qty;
-          total += itemTotal;
-          const displayName = item.isByWeight
-            ? `${item.name} (${item.weight.toFixed(2)} كغ)`
-            : item.name;
-
-          list.innerHTML += `
-            <div class="cart-item">
-              <div class="cart-item-info">
-                <b>${displayName}</b><br>
-                <span style="color:#bbb; font-size:0.85rem;">السعر: ${item.price.toFixed(
-                  1,
-                )}₪</span><br>
-                <span style="color:var(--brand-color); font-weight:bold;">الإجمالي: ${itemTotal.toFixed(
-                  1,
-                )}₪</span>
-              </div>
-              <div class="cart-qty-controls">
-                <button class="mini-qty-btn" onclick="adjustCartQty(${idx}, -1)">-</button>
-                <span style="font-weight:bold; font-size:0.9rem; width:20px; text-align:center;">${
-                  item.qty
-                }</span>
-                <button class="mini-qty-btn" onclick="adjustCartQty(${idx}, 1)">+</button>
-              </div>
-            </div>
-          `;
-        });
-
-        document.getElementById("cartTotal").textContent =
-          `المجموع: ${total.toFixed(1)} ₪`;
-      }
-
-      function adjustCartQty(idx, change) {
-        cart[idx].qty += change;
-        if (cart[idx].qty <= 0) cart.splice(idx, 1);
-        updateCartUI();
-        updateCartBadge();
-      }
-
-      function backToCart() {
-        document.getElementById("customerModal").classList.remove("active");
-        document.getElementById("cartModal").classList.add("active");
-      }
-
-      function editOrder() {
-        document.getElementById("confirmOrderModal").classList.remove("active");
-        document.getElementById("customerModal").classList.add("active");
-      }
-
-      function showConfirmation() {
-        const invoiceContainer = document.getElementById("invoiceContainer");
-        let itemsTotal = 0;
-        const provinceName =
-          currentProvince === "gaza" ? "محافظة غزة" : "المحافظة الوسطى";
-        const fullAddress = `${provinceName} - ${selectedLocation.name} - ${customerInfo.address}`;
-
-        let tableRows = "";
-        cart.forEach((item) => {
-          const itemTotal = item.price * item.qty;
-          itemsTotal += itemTotal;
-          const displayName = item.isByWeight
-            ? `${
-                item.name
-              }<br><small style="color:#666;">(${item.weight.toFixed(
-                2,
-              )} كغ)</small>`
-            : item.name;
-          const unitPriceDisplay = item.isByWeight
-            ? `${item.unitPrice} ₪/كغ`
-            : `${item.unitPrice} ₪`;
-
-          tableRows += `
-            <tr>
-              <td>${displayName}</td>
-              <td>${item.qty}</td>
-              <td>${unitPriceDisplay}</td>
-              <td>${itemTotal.toFixed(1)} ₪</td>
-            </tr>
-          `;
-        });
-
-        tableRows += `
-          <tr class="delivery-row">
-            <td>🚚 رسوم التوصيل</td>
-            <td>-</td>
-            <td>${selectedLocation.name}</td>
-            <td>${selectedLocation.price} ₪</td>
-          </tr>
-        `;
-
-        const grandTotal = itemsTotal + selectedLocation.price;
-
-        invoiceContainer.innerHTML = `
-          <div class="invoice-header">
-            <h3>🍽️ O<sub>2</sub> Restaurant</h3>
-            <p>فاتورة طلب توصيل</p>
-          </div>
-
-          <div class="invoice-customer">
-            <div class="invoice-customer-row">
-              <span class="invoice-customer-label">👤 الاسم:</span>
-              <span class="invoice-customer-value">${customerInfo.name}</span>
-            </div>
-            <div class="invoice-customer-row">
-              <span class="invoice-customer-label">📱 الهاتف:</span>
-              <span class="invoice-customer-value">${customerInfo.phone}</span>
-            </div>
-            <div class="invoice-customer-row">
-              <span class="invoice-customer-label">📍 العنوان:</span>
-              <span class="invoice-customer-value">${fullAddress}</span>
-            </div>
-          </div>
-
-          <table class="invoice-table">
-            <thead>
-              <tr>
-                <th>الصنف</th>
-                <th>الكمية</th>
-                <th>السعر</th>
-                <th>المبلغ</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${tableRows}
-            </tbody>
-          </table>
-
-          <div class="invoice-total-box">
-            <div class="invoice-total-label">إجمالي الفاتورة</div>
-            <div class="invoice-total-amount">${grandTotal.toFixed(1)} ₪</div>
-          </div>
-
-          <div class="invoice-footer">
-            <p>شكراً لطلبكم من O2 Restaurant 🙏</p>
-            <p>سيتم التواصل معكم قريباً</p>
-          </div>
-        `;
-
-        document.getElementById("confirmOrderModal").classList.add("active");
-      }
-
-      function executeWhatsAppSend() {
-        let itemsTotal = 0;
-        const provinceName =
-          currentProvince === "gaza" ? "محافظة غزة" : "المحافظة الوسطى";
-        const fullAddress = `${provinceName} - ${selectedLocation.name} - ${customerInfo.address}`;
-
-        const targetNumber = getWhatsAppNumber();
-
-        let msg = "🍽️ *طلب جديد من O2 Restaurant*\n━━━━━━━━━━━━━━\n\n";
-        msg += `👤 *بيانات العميل:*\n`;
-        msg += `• الاسم: ${customerInfo.name}\n`;
-        msg += `• الهاتف: ${customerInfo.phone}\n`;
-        msg += `• العنوان: ${fullAddress}\n\n`;
-
-        msg += "📋 *تفاصيل الطلب:*\n";
-        msg += "┌────────────────────────┐\n";
-
-        cart.forEach((i) => {
-          const itemTotal = i.price * i.qty;
-          itemsTotal += itemTotal;
-          const displayName = i.isByWeight
-            ? `${i.name} (${i.weight.toFixed(2)} كغ)`
-            : i.name;
-          const unitPriceDisplay = i.isByWeight
-            ? `${i.unitPrice} ₪/كغ`
-            : `${i.unitPrice} ₪`;
-          msg += `│ ${displayName}\n`;
-          msg += `│   الكمية: ${i.qty} | السعر: ${unitPriceDisplay}\n`;
-          msg += `│   المبلغ: ${itemTotal.toFixed(1)} ₪\n`;
-          msg += `├────────────────────────┤\n`;
-        });
-
-        msg += `│ 🚚 رسوم التوصيل: ${selectedLocation.price} ₪\n`;
-        msg += `└────────────────────────┘\n\n`;
-        msg += `━━━━━━━━━━━━━━\n`;
-        msg += `💵 *إجمالي الفاتورة: ${(
-          itemsTotal + selectedLocation.price
-        ).toFixed(1)} ₪*`;
-
-        window.open(
-          `https://wa.me/${targetNumber}?text=${encodeURIComponent(msg)}`,
-        );
-
-        cart = [];
-        selectedLocation = null;
-        currentProvince = null;
-        customerInfo = { name: "", phone: "", address: "" };
-        updateCartUI();
-        updateCartBadge();
-        document.getElementById("confirmOrderModal").classList.remove("active");
-        document.getElementById("customerForm").reset();
-        document.getElementById("deliveryPriceDisplay").style.display = "none";
-        document.getElementById("locationGroup").style.display = "none";
-      }
-
-      function showToast(msg) {
-        const t = document.createElement("div");
-        t.style =
-          "position:fixed; top:20px; left:50%; transform:translateX(-50%); background:var(--brand-color); color:white; padding:12px 24px; border-radius:10px; z-index:3000; box-shadow: 0 5px 15px rgba(0,0,0,0.3); font-weight:bold; max-width:90vw; text-align:center;";
-        t.textContent = msg;
-        document.body.appendChild(t);
-        setTimeout(() => t.remove(), 3000);
       }
 
       function revealProducts() {
@@ -2399,63 +965,13 @@
           .forEach((card) => observer.observe(card));
       }
 
+      // Event Listeners
       document.getElementById("burgerMenu").onclick = toggleNav;
       document.getElementById("navOverlay").onclick = toggleNav;
-      document.getElementById("addToCartBtn").onclick = addToCart;
 
-      document.getElementById("cartButton").onclick = () => {
-        updateCartUI();
-        document.getElementById("cartModal").classList.add("active");
-      };
-
-      document.getElementById("clearCartBtn").onclick = () => {
-        cart = [];
-        updateCartUI();
-        updateCartBadge();
-      };
-
-      document.getElementById("sendCartBtn").onclick = () => {
-        if (cart.length === 0) {
-          showToast("السلة فارغة");
-          return;
-        }
-        document.getElementById("cartModal").classList.remove("active");
-        document.getElementById("customerModal").classList.add("active");
-      };
-
-      document.getElementById("customerForm").onsubmit = (e) => {
-        e.preventDefault();
-        customerInfo.name = document
-          .getElementById("customerName")
-          .value.trim();
-        customerInfo.phone = document
-          .getElementById("customerPhone")
-          .value.trim();
-        customerInfo.address = document
-          .getElementById("customerAddress")
-          .value.trim();
-
-        if (
-          !customerInfo.name ||
-          !customerInfo.phone ||
-          !customerInfo.address
-        ) {
-          showToast("يرجى ملء جميع الحقول");
-          return;
-        }
-
-        if (!currentProvince) {
-          showToast("يرجى اختيار المحافظة");
-          return;
-        }
-
-        if (!selectedLocation) {
-          showToast("يرجى اختيار منطقة التوصيل");
-          return;
-        }
-
-        document.getElementById("customerModal").classList.remove("active");
-        showConfirmation();
+      // Close modal when clicking outside
+      document.getElementById("productModal").onclick = function (e) {
+        if (e.target === this) closeModal();
       };
 
       init();
